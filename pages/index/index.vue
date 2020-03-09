@@ -40,6 +40,9 @@
 					</view>	
 				</view>
 				<!---->
+				<view>
+					你好
+				</view>
 			</view>
 		</scroll-view>
 	</view>
