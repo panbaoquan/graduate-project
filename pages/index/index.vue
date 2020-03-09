@@ -40,8 +40,20 @@
 					</view>	
 				</view>
 				<!---->
-				<view>
-					你好
+				<!--附近商家-->
+				<view class="nearStone">
+					<text class="nearStone-title">
+						附近商家
+					</text>
+					<view class="nearStone-select">
+						<view class="nearStone-select-group">
+								<text>综合排序<text class="iconfont icon_arrowDown"></text></text>
+                               								
+						</view>
+						<view class="nearStone-select-group">品类<text class="iconfont icon_arrowDown"></text></view>
+						<view class="nearStone-select-group">速度<text class="iconfont icon_arrowDown"></text></view>
+						<view class="nearStone-select-group">全部筛选<text class="iconfont icon_arrowDown"></text></view>
+					</view>
 				</view>
 			</view>
 		</scroll-view>
@@ -173,6 +185,16 @@
 
 </style>
 <style lang="scss" scoped>
+	.nearStone {
+		width: 100%;
+		&-select {
+			font-size: 11.34rpx;
+			display: flex;
+			&-group {
+				flex: 1;
+			}
+		}
+	}
 	
 	.classify {
 		width: 100%;
@@ -218,16 +240,12 @@
 	}
 
 	.icon {
-		&_location {
-			font-size: 44.44rpx;
-			font-weight: bolder;
-			margin-top: 34.72rpx;
+		&_arrowDown{
+			font-size: 8.51rpx;
 		}
 
-		&_tongzhi {
-			font-size: 42.44rpx;
-			font-weight: bolder;
-			margin-top: 34.72rpx;
+		&_arrowTop {
+			font-size: 8.51rpx;
 		}
 	}
 
