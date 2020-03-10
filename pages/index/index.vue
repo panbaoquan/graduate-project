@@ -47,12 +47,17 @@
 					</text>
 					<view class="nearStone-select">
 						<view class="nearStone-select-group">
-								<text>综合排序<text class="iconfont icon_arrowDown"></text></text>
-                               								
+								<text class="nearStone-select-group" @tap="selectSort">综合排序
+								<text class="iconfont icon_arrowDown" v-show="flagSort"></text>
+								<text class="iconfont icon_arrowTop" v-show="!flagSort"></text>
+								</text>   								
 						</view>
 						<view class="nearStone-select-group">品类<text class="iconfont icon_arrowDown"></text></view>
 						<view class="nearStone-select-group">速度<text class="iconfont icon_arrowDown"></text></view>
 						<view class="nearStone-select-group">全部筛选<text class="iconfont icon_arrowDown"></text></view>
+					</view>
+					<view class="group-select" v-show="selectContent">
+						下拉选择内容
 					</view>
 				</view>
 			</view>
@@ -69,6 +74,8 @@
 	export default {
 		data() {
 			return {
+				selectContent:false,
+				flagSort:true,
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
@@ -162,6 +169,22 @@
 				uni.navigateTo({
 					url: './search/search'
 				})
+			},
+			selectSort() {
+				//箭头的开关
+				this.flagSort = !this.flagSort
+				//下拉面板
+				if(this.flagSort){
+					 
+					console.log('下')
+					this.selectContent = false
+					
+				}else {
+					console.log('上')
+					this.selectContent = true
+					
+				}
+				
 			}
 		},
 		components: {
