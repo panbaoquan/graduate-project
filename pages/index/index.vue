@@ -47,7 +47,7 @@
 					</text>
 					<view class="nearStone-select">
 						<view class="nearStone-select-group">
-								<text class="nearStone-select-group" @tap="selectSort">综合排序
+								<text class="nearStone-select-group" @tap="selectSort">{{rank}}
 								<text class="iconfont icon_arrowDown" v-show="flagSort"></text>
 								<text class="iconfont icon_arrowTop" v-show="!flagSort"></text>
 								</text>   								
@@ -57,7 +57,9 @@
 						<view class="nearStone-select-group">全部筛选<text class="iconfont icon_arrowDown"></text></view>
 					</view>
 					<view class="group-select" v-show="selectContent">
-						下拉选择内容
+						<view @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
+							{{item.name}}
+						</view>
 					</view>
 				</view>
 			</view>
@@ -74,6 +76,20 @@
 	export default {
 		data() {
 			return {
+				rankContent:[{
+					id:0,
+					name:"综合排序"
+				},{
+					id:1,
+					name:"销量优先"
+				},{
+					id:2,
+					name:"距离优先"
+				},{
+					id:3,
+					name:"评分优先"
+				}],
+				rank:"综合排序",
 				selectContent:false,
 				flagSort:true,
 				scrollTop: 0,
@@ -161,6 +177,18 @@
 
 		},
 		methods: {
+			changeRankContent(index){
+				for(let i=0;i<this.rankContent.length;i++){
+					if(this.rankContent[i].id===index){
+						//更换排名内容
+						this.rank = this.rankContent[i].name
+						//排名面板消失
+						this.selectContent = false
+						//改变箭头方向,向下
+						this.flagSort = true
+					}
+				}
+			},
 			scroll: function(e) {
 				console.log(e)
 				// this.old.scrollTop = e.detail.scrollTop
@@ -173,14 +201,10 @@
 			selectSort() {
 				//箭头的开关
 				this.flagSort = !this.flagSort
-				//下拉面板
-				if(this.flagSort){
-					 
-					console.log('下')
+				//下拉面板，通过上下箭头判断面板是否出来
+				if(this.flagSort){					 
 					this.selectContent = false
-					
 				}else {
-					console.log('上')
 					this.selectContent = true
 					
 				}
@@ -218,7 +242,10 @@
 			}
 		}
 	}
-	
+	.group-select {
+		font-size: 11.34rpx;
+		color: #808080;
+	}
 	.classify {
 		width: 100%;
 		height: 400rpx;
