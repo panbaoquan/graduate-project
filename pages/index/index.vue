@@ -46,18 +46,25 @@
 						附近商家
 					</text>
 					<view class="nearStone-select">
+						<!--综合排序-->
 						<view class="nearStone-select-group">
 								<text class="nearStone-select-group" @tap="selectSort">{{rank}}
 								<text class="iconfont icon_arrowDown" v-show="flagSort"></text>
 								<text class="iconfont icon_arrowTop" v-show="!flagSort"></text>
 								</text>   								
 						</view>
-						<view class="nearStone-select-group">品类<text class="iconfont icon_arrowDown"></text></view>
+						<!--品类-->
+						<view class="nearStone-select-group">品类
+						<text class="iconfont icon_arrowDown"></text>
+						</view>
+						<!--速度-->
 						<view class="nearStone-select-group">速度<text class="iconfont icon_arrowDown"></text></view>
+						<!--全部筛选-->
 						<view class="nearStone-select-group">全部筛选<text class="iconfont icon_arrowDown"></text></view>
 					</view>
+					<!--综合排序-下拉模块-->
 					<view class="group-select" v-show="selectContent">
-						<view @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
+						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
 							{{item.name}}
 						</view>
 					</view>
@@ -243,8 +250,13 @@
 		}
 	}
 	.group-select {
-		font-size: 11.34rpx;
+		font-size: 30rpx!important;
 		color: #808080;
+		&-item {
+			background-color: #F8F8F8;
+			padding: 7.09rpx 0 7.09rpx 0;
+			border-bottom: 1px solid #ccc;
+		}
 	}
 	.classify {
 		width: 100%;
