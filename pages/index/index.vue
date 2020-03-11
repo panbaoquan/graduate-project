@@ -5,6 +5,7 @@
 			<view class="top">
 				<view class="status_bar">
 					<!-- 这里是状态栏 -->
+
 				</view>
 				<!-- 	<view class="header">
 					<view class="header_location">
@@ -19,27 +20,27 @@
 			</view>
 			<view class="content">
 				<!-- 搜索框-->
-				<view @tap="searchPage">
-					<uni-search-bar :radius="100" class="search" placeholder="请输入商家或商品名称" cancelButton="none"></uni-search-bar>
+				<view class="bar" @tap="searchPage">
+					<image src="../../static/images/search.png" alt="">
+						<input type="text" value="" placeholder="请输入要搜索的内容" />
 				</view>
 				<!-- 轮播图-->
-				
-					<swiper class="swiper" indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true">
-						<swiper-item v-for="(item ,index) in info" :key="index">
-							<view class="swiper-item" :style="{backgroundColor:item.bgcolor}">
-								{{item.content}}
-							</view>
-						</swiper-item>
-					</swiper>
-				
-				<!--分类-->
-				<view class="classify">
-					<view class="classify-item"  v-for="(item,index) in menus" :key="index">
+				<swiper class="swiper" indicator-dots="true" autoplay="true" interval="3000" duration="1000" circular="true">
+					<swiper-item v-for="(item ,index) in info" :key="index">
+						<view class="swiper-item" :style="{backgroundColor:item.bgcolor}">
+							{{item.content}}
+						</view>
+					</swiper-item>
+				</swiper>
+				<!-- 分类 -->
+				<view class="block">
+					<view class="block-section" v-for="(item,index) in menus" :key="index">
 						<image :src="item.iconPath" mode=""></image>
-						<text class="classify-item-title">{{item.name}}</text>
-					</view>	
+						<view>
+							<text class="classify-item-title">{{item.name}}</text>
+						</view>
+					</view>
 				</view>
-				<!---->
 				<!--附近商家-->
 				<view class="nearStone">
 					<text class="nearStone-title">
@@ -48,14 +49,14 @@
 					<view class="nearStone-select">
 						<!--综合排序-->
 						<view class="nearStone-select-group">
-								<text class="nearStone-select-group" @tap="selectSort">{{rank}}
+							<text class="nearStone-select-group" @tap="selectSort">{{rank}}
 								<text class="iconfont icon_arrowDown" v-show="flagSort"></text>
 								<text class="iconfont icon_arrowTop" v-show="!flagSort"></text>
-								</text>   								
+							</text>
 						</view>
 						<!--品类-->
 						<view class="nearStone-select-group">品类
-						<text class="iconfont icon_arrowDown"></text>
+							<text class="iconfont icon_arrowDown"></text>
 						</view>
 						<!--速度-->
 						<view class="nearStone-select-group">速度<text class="iconfont icon_arrowDown"></text></view>
@@ -83,22 +84,22 @@
 	export default {
 		data() {
 			return {
-				rankContent:[{
-					id:0,
-					name:"综合排序"
-				},{
-					id:1,
-					name:"销量优先"
-				},{
-					id:2,
-					name:"距离优先"
-				},{
-					id:3,
-					name:"评分优先"
+				rankContent: [{
+					id: 0,
+					name: "综合排序"
+				}, {
+					id: 1,
+					name: "销量优先"
+				}, {
+					id: 2,
+					name: "距离优先"
+				}, {
+					id: 3,
+					name: "评分优先"
 				}],
-				rank:"综合排序",
-				selectContent:false,
-				flagSort:true,
+				rank: "综合排序",
+				selectContent: false,
+				flagSort: true,
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
@@ -106,56 +107,55 @@
 				scrollHeight: 0,
 				info: [{
 					content: '',
-					bgcolor:'red'
+					bgcolor: 'red'
 				}, {
 					content: '',
-					bgcolor:'green'
+					bgcolor: 'green'
 				}, {
 					content: '',
-					bgcolor:'blue'
+					bgcolor: 'blue'
 				}],
-				menus:[
-					{
-						name:'甜点饮品',
-						iconPath:'../../static/images/sweet-drinks.png'
+				menus: [{
+						name: '甜点饮品',
+						iconPath: '../../static/images/sweet-drinks.png'
 					},
 					{
-						name:'超市便利',
-						iconPath:'../../static/images/supermarket.png'
+						name: '超市便利',
+						iconPath: '../../static/images/supermarket.png'
 					},
 					{
-						name:'蔬菜水果',
-						iconPath:'../../static/images/fresh.png'
+						name: '蔬菜水果',
+						iconPath: '../../static/images/fresh.png'
 					},
 					{
-						name:'汉堡披萨',
-						iconPath:'../../static/images/hamburger.png'
+						name: '汉堡披萨',
+						iconPath: '../../static/images/hamburger.png'
 					},
 					{
-						name:'面包蛋糕',
-						iconPath:'../../static/images/cake.png'
+						name: '面包蛋糕',
+						iconPath: '../../static/images/cake.png'
 					},
 					{
-						name:'快食简餐',
-						iconPath:'../../static/images/fast-food.png'
+						name: '快食简餐',
+						iconPath: '../../static/images/fast-food.png'
 					},
 					{
-						name:'家常菜',
-						iconPath:'../../static/images/home-cooking.png'
+						name: '家常菜',
+						iconPath: '../../static/images/home-cooking.png'
 					},
 					{
-						name:'小吃馆',
-						iconPath:'../../static/images/restaurant.png'
+						name: '小吃馆',
+						iconPath: '../../static/images/restaurant.png'
 					},
 					{
-						name:'浪漫鲜花',
-						iconPath:'../../static/images/flower.png'
+						name: '浪漫鲜花',
+						iconPath: '../../static/images/flower.png'
 					},
 					{
-						name:'全部',
-						iconPath:'../../static/images/all.png'
+						name: '全部',
+						iconPath: '../../static/images/all.png'
 					}
-					
+
 				]
 			}
 		},
@@ -184,9 +184,9 @@
 
 		},
 		methods: {
-			changeRankContent(index){
-				for(let i=0;i<this.rankContent.length;i++){
-					if(this.rankContent[i].id===index){
+			changeRankContent(index) {
+				for (let i = 0; i < this.rankContent.length; i++) {
+					if (this.rankContent[i].id === index) {
 						//更换排名内容
 						this.rank = this.rankContent[i].name
 						//排名面板消失
@@ -209,13 +209,13 @@
 				//箭头的开关
 				this.flagSort = !this.flagSort
 				//下拉面板，通过上下箭头判断面板是否出来
-				if(this.flagSort){					 
+				if (this.flagSort) {
 					this.selectContent = false
-				}else {
+				} else {
 					this.selectContent = true
-					
+
 				}
-				
+
 			}
 		},
 		components: {
@@ -228,36 +228,44 @@
 	.modStyle {
 		background-color: #F5F2F0;
 	}
+
 	.modStyle .uni-searchbar__box {
 		justify-content: flex-start !important;
 		border-color: #807f7f;
 	}
+
 	.modStyle .uni-searchbar {
 		background-color: #F5F2F0;
-		
-	}
 
+	}
 </style>
+
 <style lang="scss" scoped>
+	 @import "./index.scss";
 	.nearStone {
 		width: 100%;
+
 		&-select {
 			font-size: 11.34rpx;
 			display: flex;
+
 			&-group {
 				flex: 1;
 			}
 		}
 	}
+
 	.group-select {
-		font-size: 30rpx!important;
+		font-size: 30rpx !important;
 		color: #808080;
+
 		&-item {
 			background-color: #F8F8F8;
 			padding: 7.09rpx 0 7.09rpx 0;
 			border-bottom: 1px solid #ccc;
 		}
 	}
+
 	.classify {
 		width: 100%;
 		height: 400rpx;
@@ -267,30 +275,34 @@
 		justify-content: space-around;
 		align-content: space-around;
 		border-radius: 15px;
-		box-shadow:0 2px 4px rgba($color: #000000, $alpha: .12);
+		box-shadow: 0 2px 4px rgba($color: #000000, $alpha: .12);
 		background-color: #FFFFFF;
+
 		&-item {
-			flex: 1;
+			flex: 0 0 120rpx;
 			text-align: center;
 			font-size: 5px !important;
+
 			&-title {
 				font-size: 26rpx;
 				margin-top: 15px;
-				
+
 			}
 		}
+
 		image {
-			
-			width: 120rpx;
-			height: 120rpx;
+			width: 50px;
+			height: 50px;
 		}
 	}
+
 	.swiper {
 		width: 100%;
-        border-radius: 15px;
+		border-radius: 15px;
+
 		&-item {
 			height: 100%;
-			 border-radius: 15px;
+			border-radius: 15px;
 		}
 
 	}
@@ -302,7 +314,7 @@
 	}
 
 	.icon {
-		&_arrowDown{
+		&_arrowDown {
 			font-size: 8.51rpx;
 		}
 
@@ -339,10 +351,10 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		
+
 		width: 95%;
-		margin: 0 auto;
-		
+		margin: 0px auto;
+
 		&_header {
 			width: 100%;
 			height: 37.58rpx;
