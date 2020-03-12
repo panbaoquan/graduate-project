@@ -23,4 +23,5 @@ export default {
   width: 100%;
   background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%);
 }
+/*提交*/
 </style>
