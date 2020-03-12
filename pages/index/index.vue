@@ -1,6 +1,6 @@
 <template>
 	<view class="modStyle">
-		<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower"
+		<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" 
 		 @scroll="scroll" show-scrollbar="false">
 			<view class="top">
 				<view class="status_bar">
@@ -56,13 +56,19 @@
 					</view>
 					<!--综合排序-下拉模块-->
 					<view class="group-select-sort" v-show="flags[0].flag_dropdown_list">
-						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
+						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in flags[0].rankContent" :key="index">
 							{{item.name}}
 						</view>
 					</view>
 					<!--品类-下拉模块-->
-					<view  v-show="flags[1].flag_dropdown_list">
-                       	品类下拉面板			  	
+					<view class="group-select-kind" v-show="flags[1].flag_dropdown_list">
+                       	<view class="group-select-kind-leftList">
+                       		
+                       	</view>
+						
+						<view class="group-select-kind-rightContent">
+							
+						</view>
 					</view>
 					<!--速度-下拉面板-->
 					<view  v-show="flags[2].flag_dropdown_list">
@@ -87,29 +93,25 @@
 	export default {
 		data() {
 			return {
-				rankContent: [{
-					id: 0,
-					name: "综合排序"
-				}, {
-					id: 1,
-					name: "销量优先"
-				}, {
-					id: 2,
-					name: "距离优先"
-				}, {
-					id: 3,
-					name: "评分优先"
-				}],
-				rank: "综合排序",
-				selectContent: false,
-				kindContent:false,
-				flagSort: true,
 				flags:[
 					{   
 						name:'综合排序',
 						flagValue:true,
 						flagName:'flagSort',
 						flag_dropdown_list:false,
+						rankContent: [{
+							id: 0,
+							name: "综合排序"
+						}, {
+							id: 1,
+							name: "销量优先"
+						}, {
+							id: 2,
+							name: "距离优先"
+						}, {
+							id: 3,
+							name: "评分优先"
+						}],
 					},
 					{    
 						name:'品类',
@@ -214,17 +216,19 @@
 
 		},
 		methods: {
+			//改变综合排序出的值
 			changeRankContent(index) {
-				for (let i = 0; i < this.rankContent.length; i++) {
-					if (this.rankContent[i].id === index) {
+				for (let i = 0; i < this.flags[0].rankContent.length; i++) {
+					if (this.flags[0].rankContent[i].id === index) {
 						//更换排名内容
-						this.rank = this.rankContent[i].name
+						this.flags[0].name = this.flags[0].rankContent[i].name
 						//排名面板消失
-						this.selectContent = false
+						this.flags[0].flag_dropdown_list = false
 						//改变箭头方向,向下
-						this.flagSort = true
+						this.flags[0].flagValue = true
 					}
 				}
+				
 			},
 			scroll: function(e) {
 				console.log(e)
@@ -235,7 +239,7 @@
 					url: './search/search'
 				})
 			},
-			//封装下拉按钮箭头  
+			//封装筛选模块  
 			selectFlag(flagValue,flagName) {
 				//箭头的开关值
 				flagValue = !flagValue
@@ -286,7 +290,7 @@
 		width: 100%;
 
 		&-select {
-			font-size: 11.34rpx;
+			font-size: 16px;
 			display: flex;
 
 			&-group {
