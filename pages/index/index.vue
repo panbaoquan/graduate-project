@@ -290,7 +290,7 @@
 		width: 100%;
 
 		&-select {
-			font-size: 16px;
+			font-size: 25rpx;
 			display: flex;
 
 			&-group {
@@ -362,11 +362,11 @@
 
 	.icon {
 		&_arrowDown {
-			font-size: 8.51rpx;
+			font-size: 15rpx;
 		}
 
 		&_arrowTop {
-			font-size: 8.51rpx;
+			font-size: 15rpx;
 		}
 	}
 
