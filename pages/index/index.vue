@@ -46,28 +46,23 @@
 					<text class="nearStone-title">
 						附近商家
 					</text>
-					<view class="nearStone-select">
-						<!--综合排序-->
-						<view class="nearStone-select-group">
-							<text class="nearStone-select-group" @tap="selectSort">{{rank}}
-								<text class="iconfont icon_arrowDown" v-show="flagSort"></text>
-								<text class="iconfont icon_arrowTop" v-show="!flagSort"></text>
-							</text>
+					<!--筛选模块（封装）-->
+					<view class="nearStone-select">				
+						<view class="nearStone-select-group"  v-for="(item,index) in flags" :key="index" @tap="selectFlag(item.flagValue,item.flagName)">
+							{{item.name}}
+							<text class="iconfont icon_arrowDown" v-show="item.flagValue"></text>
+							<text class="iconfont icon_arrowTop" v-show="!item.flagValue"></text>
 						</view>
-						<!--品类-->
-						<view class="nearStone-select-group">品类
-							<text class="iconfont icon_arrowDown"></text>
-						</view>
-						<!--速度-->
-						<view class="nearStone-select-group">速度<text class="iconfont icon_arrowDown"></text></view>
-						<!--全部筛选-->
-						<view class="nearStone-select-group">全部筛选<text class="iconfont icon_arrowDown"></text></view>
 					</view>
 					<!--综合排序-下拉模块-->
 					<view class="group-select" v-show="selectContent">
 						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
 							{{item.name}}
 						</view>
+					</view>
+					<!--品类-下拉模块-->
+					<view class="">
+						
 					</view>
 				</view>
 			</view>
@@ -100,6 +95,28 @@
 				rank: "综合排序",
 				selectContent: false,
 				flagSort: true,
+				flags:[
+					{   
+						name:'综合排序',
+						flagValue:true,
+						flagName:'flagSort'
+					},
+					{    
+						name:'品类',
+						flagValue:true,
+						flagName:'flagKind'
+					},
+					{
+						name:'速度',
+						flagValue:true,
+						flagName:'flagSpeed'
+					},
+					{
+						name:'全部筛选',
+						flagValue:true,
+					    flagName:'flagFilter'	
+					}
+				],
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
@@ -205,17 +222,26 @@
 					url: './search/search'
 				})
 			},
-			selectSort() {
+			//封装下拉按钮箭头  
+			selectFlag(flagValue,flagName) {
 				//箭头的开关
-				this.flagSort = !this.flagSort
+				flagValue = !flagValue
+				//改变数组里控制开关的值
+				this.flags.forEach(item=>{
+					if(item.flagName===flagName){
+						item.flagValue = flagValue
+					}
+				})		
+				
 				//下拉面板，通过上下箭头判断面板是否出来
-				if (this.flagSort) {
-					this.selectContent = false
-				} else {
-					this.selectContent = true
+				// if (this.flagSort) {
+				// 	this.selectContent = false
+				// } else {
+				// 	this.selectContent = true
 
-				}
-
+				// }
+            console.log(flagValue,flagName)
+			
 			}
 		},
 		components: {
@@ -254,7 +280,7 @@
 			}
 		}
 	}
-
+   
 	.group-select {
 		font-size: 30rpx !important;
 		color: #808080;
