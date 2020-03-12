@@ -55,14 +55,22 @@
 						</view>
 					</view>
 					<!--综合排序-下拉模块-->
-					<view class="group-select" v-show="selectContent">
+					<view class="group-select-sort" v-show="flags[0].flag_dropdown_list">
 						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in rankContent">
 							{{item.name}}
 						</view>
 					</view>
 					<!--品类-下拉模块-->
-					<view class="">
-						
+					<view  v-show="flags[1].flag_dropdown_list">
+                       	品类下拉面板			  	
+					</view>
+					<!--速度-下拉面板-->
+					<view  v-show="flags[2].flag_dropdown_list">
+						速度下拉面板
+					</view>
+					<!--全部筛选-下拉面板-->
+					<view  v-show="flags[3].flag_dropdown_list">
+						全部筛选下拉面板
 					</view>
 				</view>
 			</view>
@@ -94,27 +102,32 @@
 				}],
 				rank: "综合排序",
 				selectContent: false,
+				kindContent:false,
 				flagSort: true,
 				flags:[
 					{   
 						name:'综合排序',
 						flagValue:true,
-						flagName:'flagSort'
+						flagName:'flagSort',
+						flag_dropdown_list:false,
 					},
 					{    
 						name:'品类',
 						flagValue:true,
-						flagName:'flagKind'
+						flagName:'flagKind',
+						flag_dropdown_list:false,
 					},
 					{
 						name:'速度',
 						flagValue:true,
-						flagName:'flagSpeed'
+						flagName:'flagSpeed',
+						flag_dropdown_list:false,
 					},
 					{
 						name:'全部筛选',
 						flagValue:true,
-					    flagName:'flagFilter'	
+					    flagName:'flagFilter',
+					    flag_dropdown_list:false,
 					}
 				],
 				scrollTop: 0,
@@ -224,23 +237,24 @@
 			},
 			//封装下拉按钮箭头  
 			selectFlag(flagValue,flagName) {
-				//箭头的开关
+				//箭头的开关值
 				flagValue = !flagValue
-				//改变数组里控制开关的值
+				
 				this.flags.forEach(item=>{
+				    //每次初始化进来
+					
+					//让4个下拉面板都消失
+					item.flag_dropdown_list = false
+					//除当前点击的面板，其它面板的箭头向下，即它的flag要为true
+					item.flagValue = true
+					
 					if(item.flagName===flagName){
+						//上下箭头改变的开关
 						item.flagValue = flagValue
+						//下拉面板的显示开关
+						item.flag_dropdown_list = !flagValue			
 					}
 				})		
-				
-				//下拉面板，通过上下箭头判断面板是否出来
-				// if (this.flagSort) {
-				// 	this.selectContent = false
-				// } else {
-				// 	this.selectContent = true
-
-				// }
-            console.log(flagValue,flagName)
 			
 			}
 		},
@@ -282,14 +296,17 @@
 	}
    
 	.group-select {
-		font-size: 30rpx !important;
-		color: #808080;
-
-		&-item {
-			background-color: #F8F8F8;
-			padding: 7.09rpx 0 7.09rpx 0;
-			border-bottom: 1px solid #ccc;
+		&-sort {
+			font-size: 30rpx !important;
+			color: #808080;
+			
+			&-item {
+				background-color: #F8F8F8;
+				padding: 7.09rpx 0 7.09rpx 0;
+				border-bottom: 1px solid #ccc;
+			}
 		}
+		
 	}
 
 	.classify {
