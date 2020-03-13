@@ -1,7 +1,6 @@
 <template>
 	<view class="modStyle">
-		<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" 
-		 @scroll="scroll" show-scrollbar="false">
+		<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scroll="scroll" show-scrollbar="false">
 			<view class="top">
 				<view class="status_bar">
 					<!-- 这里是状态栏 -->
@@ -43,12 +42,12 @@
 				</view>
 				<!--附近商家-->
 				<view class="nearStone">
-					<text class="nearStone-title">
+					<view class="nearStone-title">
 						附近商家
-					</text>
+					</view>
 					<!--筛选模块（封装）-->
-					<view class="nearStone-select">				
-						<view class="nearStone-select-group"  v-for="(item,index) in flags" :key="index" @tap="selectFlag(item.flagValue,item.flagName)">
+					<view class="nearStone-select">
+						<view class="nearStone-select-group" v-for="(item,index) in flags" :key="index" @tap="selectFlag(item.flagValue,item.flagName)">
 							{{item.name}}
 							<text class="iconfont icon_arrowDown" v-show="item.flagValue"></text>
 							<text class="iconfont icon_arrowTop" v-show="!item.flagValue"></text>
@@ -62,20 +61,44 @@
 					</view>
 					<!--品类-下拉模块-->
 					<view class="group-select-kind" v-show="flags[1].flag_dropdown_list">
-                       	<view class="group-select-kind-leftList">
-                       		
-                       	</view>
-						
+						<view class="group-select-kind-leftList">
+
+						</view>
+
 						<view class="group-select-kind-rightContent">
-							
+
 						</view>
 					</view>
 					<!--速度-下拉面板-->
-					<view  v-show="flags[2].flag_dropdown_list">
-						速度下拉面板
+					<view class="group-select-speed" v-show="flags[2].flag_dropdown_list">
+						<view class="group-select-speed-onSpeed">
+							<view class="group-select-speed-onSpeed-item" @tap="changeBackgroundColor(index,1)" v-for="(item,index) in flags[2].time"
+							 :key="index" :style="{backgroundColor:item.bgColor}">
+								{{item.content}}
+							</view>
+						</view>
+
+						<view class="group-select-speed-underDistance">
+						
+
+							<view class="group-select-speed-underDistance-item" @tap="changeBackgroundColor(index,2)" v-for="(item,index) in flags[2].distance"
+							 :key="index" :style="{backgroundColor:item.bgColor}">
+								{{item.content}}
+							</view>
+						</view>
+						<view class="group-select-btn">
+							<view class="group-select-btn-resetBtn" @tap="reset">
+								重置
+							</view>
+							<view class="group-select-btn-finishBtn" @tap="finish">
+								完成<text v-show="count?true:false">
+									（已选{{count}})
+								</text>
+							</view>
+						</view>
 					</view>
 					<!--全部筛选-下拉面板-->
-					<view  v-show="flags[3].flag_dropdown_list">
+					<view v-show="flags[3].flag_dropdown_list">
 						全部筛选下拉面板
 					</view>
 				</view>
@@ -93,12 +116,14 @@
 	export default {
 		data() {
 			return {
-				flags:[
-					{   
-						name:'综合排序',
-						flagValue:true,
-						flagName:'flagSort',
-						flag_dropdown_list:false,
+				count: 0,
+				bgcolor: '#FFFFFF',
+				flagBg: true,
+				flags: [{
+						name: '综合排序',
+						flagValue: true,
+						flagName: 'flagSort',
+						flag_dropdown_list: false,
 						rankContent: [{
 							id: 0,
 							name: "综合排序"
@@ -113,23 +138,67 @@
 							name: "评分优先"
 						}],
 					},
-					{    
-						name:'品类',
-						flagValue:true,
-						flagName:'flagKind',
-						flag_dropdown_list:false,
+					{
+						name: '品类',
+						flagValue: true,
+						flagName: 'flagKind',
+						flag_dropdown_list: false,
 					},
 					{
-						name:'速度',
-						flagValue:true,
-						flagName:'flagSpeed',
-						flag_dropdown_list:false,
+						name: '速度',
+						flagValue: true,
+						flagName: 'flagSpeed',
+						flag_dropdown_list: false,
+						time: [{
+								content: '30分钟内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+
+							},
+							{
+								content: '40分钟内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							},
+							{
+								content: '50分钟内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							},
+							{
+								content: '60分钟内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							}
+						],
+						distance: [{
+								content: '1km以内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+
+							},
+							{
+								content: '2km以内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							},
+							{
+								content: '3km以内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							},
+							{
+								content: '5km以内',
+								bgColor: '#FFFFFF',
+								flagBg: true
+							}
+						]
 					},
 					{
-						name:'全部筛选',
-						flagValue:true,
-					    flagName:'flagFilter',
-					    flag_dropdown_list:false,
+						name: '全部筛选',
+						flagValue: true,
+						flagName: 'flagFilter',
+						flag_dropdown_list: false,
 					}
 				],
 				scrollTop: 0,
@@ -216,6 +285,47 @@
 
 		},
 		methods: {
+			//重置 
+			reset(){
+				this.count = 0
+				for(let i=0;i<this.flags[2].time.length;i++){
+					this.flags[2].time[i].flagBg='true'
+					this.flags[2].time[i].bgColor ='#FFFFFF'
+				}
+				for(let i=0;i<this.flags[2].distance.length;i++){
+					this.flags[2].distance[i].flagBg='true'
+					this.flags[2].distance[i].bgColor ='#FFFFFF'
+				}
+			},
+			finish(){
+				//箭头向下
+				this.flags[2].flagValue = true
+				//关闭下拉面板
+				this.flags[2].flag_dropdown_list = false
+			},
+			//改变背景颜色
+			changeBackgroundColor(index,group) {
+				if(group==1){
+					this.flags[2].time[index].flagBg = !this.flags[2].time[index].flagBg
+					if (this.flags[2].time[index].flagBg) {
+						this.flags[2].time[index].bgColor = '#FFFFFF'
+						this.count--
+					} else {
+						this.flags[2].time[index].bgColor = '#FFBD27'
+						this.count++
+					}
+				}else if(group==2){
+					this.flags[2].distance[index].flagBg = !this.flags[2].distance[index].flagBg
+					if (this.flags[2].distance[index].flagBg) {
+						this.flags[2].distance[index].bgColor = '#FFFFFF'
+						this.count--
+					} else {
+						this.flags[2].distance[index].bgColor = '#FFBD27'
+						this.count++
+					}
+				}
+				
+			},
 			//改变综合排序出的值
 			changeRankContent(index) {
 				for (let i = 0; i < this.flags[0].rankContent.length; i++) {
@@ -228,7 +338,7 @@
 						this.flags[0].flagValue = true
 					}
 				}
-				
+
 			},
 			scroll: function(e) {
 				console.log(e)
@@ -240,32 +350,39 @@
 				})
 			},
 			//封装筛选模块  
-			selectFlag(flagValue,flagName) {
+			selectFlag(flagValue, flagName) {
 				//箭头的开关值
 				flagValue = !flagValue
-				
-				this.flags.forEach(item=>{
-				    //每次初始化进来
-					
+
+				this.flags.forEach(item => {
+					//每次初始化进来
+
 					//让4个下拉面板都消失
 					item.flag_dropdown_list = false
 					//除当前点击的面板，其它面板的箭头向下，即它的flag要为true
 					item.flagValue = true
-					
-					if(item.flagName===flagName){
+
+					if (item.flagName === flagName) {
 						//上下箭头改变的开关
 						item.flagValue = flagValue
 						//下拉面板的显示开关
-						item.flag_dropdown_list = !flagValue			
+						item.flag_dropdown_list = !flagValue
 					}
-				})		
-			
-			}
+				})
+
+			},
+
+		},
+		watch: {
+			// count: function(val, oldVal) {
+			// 	console.log('new: %s, old: %s', val, oldVal)
+			// }
 		},
 		components: {
 			uniSearchBar,
 			uniSwiperDot
 		}
+
 	}
 </script>
 <style>
@@ -285,9 +402,14 @@
 </style>
 
 <style lang="scss" scoped>
-	 @import "./index.scss";
+	@import "./index.scss";
+
 	.nearStone {
 		width: 100%;
+
+		&-title {
+			padding: 20px 0;
+		}
 
 		&-select {
 			font-size: 25rpx;
@@ -298,19 +420,64 @@
 			}
 		}
 	}
-   
+
 	.group-select {
 		&-sort {
 			font-size: 30rpx !important;
 			color: #808080;
-			
+
 			&-item {
 				background-color: #F8F8F8;
 				padding: 7.09rpx 0 7.09rpx 0;
 				border-bottom: 1px solid #ccc;
 			}
 		}
-		
+
+		&-speed {
+			font-size: 25rpx;
+            &-onSpeed {
+				padding-top:15px!important;
+			}
+			&-onSpeed,
+			&-underDistance {
+				display: flex;
+				justify-content: space-evenly;
+				padding-top: 5px;
+
+				&-item {
+					width: 20%;
+					text-align: center;
+					padding: 5px 0;
+					border-radius: 4px;
+					background-color: #FFFFFF;
+				}
+			}
+
+		}
+
+		&-btn {
+			display: flex;
+			text-align: center;
+			height: 40px;
+			line-height: 40px;
+			padding-top: 15px;
+			font-size: 26rpx;
+			letter-spacing: 2px;
+
+			&-resetBtn {
+				flex: 1;
+				border-top: .5px solid #ccc;
+			}
+
+			&-finishBtn {
+				flex: 1;
+				border-top: .5px solid #ccc;
+				border-left: .5px solid #ccc;
+				background-color: #F0AD4E;
+			}
+
+		}
+
 	}
 
 	.classify {
@@ -415,8 +582,6 @@
 	}
 
 	.scroll-Y {}
-
-
 
 	.logo {
 		height: 200rpx;
