@@ -55,12 +55,13 @@
 					</view>
 					<!--综合排序-下拉模块-->
 					<view class="group-select-sort" v-show="flags[0].flag_dropdown_list">
-						<view class="group-select-item" @tap="changeRankContent(index)" v-for="(item,index) in flags[0].rankContent" :key="index">
+						<view class="group-select-sort-item" @tap="changeRankContent(index)" v-for="(item,index) in flags[0].rankContent" :key="index">
 							{{item.name}}
 						</view>
 					</view>
 					<!--品类-下拉模块-->
 					<view class="group-select-kind" v-show="flags[1].flag_dropdown_list">
+						尽情期待
 						<view class="group-select-kind-leftList">
 
 						</view>
@@ -99,9 +100,44 @@
 					</view>
 					<!--全部筛选-下拉面板-->
 					<view v-show="flags[3].flag_dropdown_list">
-						全部筛选下拉面板
+						尽情期待
 					</view>
 				</view>
+			   <!--店铺-->
+				<view class="stores">
+                    <view class="stores-item" v-for="item in 10"> 	
+						<view class="stores-item-leftLogo">
+							<view class="stores-item-leftLogo-top">
+							<image src="../../static/images/storesLogo/KFC-logo.jpg" mode="aspectFill"></image>
+							</view>
+							<view class="stores-item-leftLogo-bottom">
+								<!--占位-->
+							</view>
+						</view>	
+						<view class="stores-item-rightContent">
+							<view class="stores-item-rightContent-top">
+							<view class="store-title">
+								KFC肯德鸡
+							</view>
+							<view class="store-firstLine">
+								<view class="store-firstLine-evaluate">
+									<image  class="store-firstLine-evaluate-rate" src="../../static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
+								</view>
+								<view class="store-firstLine-arrivalTime">
+									<text>30分钟</text>
+									<text>1.5km</text>
+								</view>
+							</view>
+							<view class="store-secondLine">
+								起送<text>￥0</text>配送<text>￥0</text>人均<text>￥0</text>
+							</view>
+							</view>
+							<view class="stores-item-rightContent-bottom">
+								更多活动尽请期待
+							</view>
+						</view>
+                    </view>	
+			    </view>
 			</view>
 		</scroll-view>
 	</view>
@@ -403,10 +439,91 @@
 
 <style lang="scss" scoped>
 	@import "./index.scss";
-
+     .store {	
+		 &-title {
+			 //标题
+			 font-size: 32rpx;
+			 letter-spacing: 1px;
+			 font-weight: 600;
+		 }
+		 &-firstLine {
+			 height: 18px;
+			 // background-color: #007AFF; 
+			 font-size: 12px;
+			 display: flex;
+			 &-evaluate {
+				 flex: 1;
+			     display: flex;
+				 align-items: center;
+				 &-rate {
+					 width: 16px;
+					 height: 16px;	 
+				 }
+				 &>text {
+					 padding-left: 2px;
+				 }
+			 }
+			 &-arrivalTime {
+				 flex: 1;
+				 text-align: right;
+				 
+				 &>text:nth-child(2) {
+				    padding-left: 5px;
+					
+				 }
+			 }
+		 }
+		 &-secondLine {
+			 font-size: 12px;
+			 &>text {
+				 
+				 padding-right: 6px;
+			 }
+		 }
+	 }
+	 .stores {
+		 width: 100%;
+		 border-radius: 4px;
+		 margin-top: 10px;
+	 }
+	
+	 .stores-item {
+		display: flex;
+		padding: 10px;
+        border-radius: 4px; 
+		justify-content: space-between;
+		background-color: #FFFFFF;
+		margin-bottom: 5px;
+		&-leftLogo {
+			width: 20%;
+			&-top {
+				height: 50px;
+				background-color: #333333;
+				& >image {
+					width: 100%;
+					height: 100%;
+				}
+			}
+			&-bottom {
+				height: 30px;
+			}
+		}
+		&-rightContent {
+			width: 77%;
+			
+			&-top {
+				height: 50px;
+				
+			}
+			&-bottom {
+				font-size: 12px;
+				height: 30px;
+				padding-top: 5px;
+			}
+		}
+	 }
 	.nearStone {
 		width: 100%;
-
 		&-title {
 			padding: 20px 0;
 		}
@@ -427,9 +544,9 @@
 			color: #808080;
 
 			&-item {
-				background-color: #F8F8F8;
+				
 				padding: 7.09rpx 0 7.09rpx 0;
-				border-bottom: 1px solid #ccc;
+				border-bottom: .5px solid #ccc;
 			}
 		}
 
