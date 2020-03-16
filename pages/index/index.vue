@@ -405,11 +405,11 @@
 				this.count = 0
 				for (let i = 0; i < this.flags[2].time.length; i++) {
 					this.flags[2].time[i].flagBg = 'true'
-					this.flags[2].time[i].bgColor = '#FFFFFF'
+					this.flags[2].time[i].bgColor = '#F1F1F1'
 				}
 				for (let i = 0; i < this.flags[2].distance.length; i++) {
 					this.flags[2].distance[i].flagBg = 'true'
-					this.flags[2].distance[i].bgColor = '#FFFFFF'
+					this.flags[2].distance[i].bgColor = '#F1F1F1'
 				}
 			},
 			finish() {
@@ -423,7 +423,7 @@
 				if (group == 1) {
 					this.flags[2].time[index].flagBg = !this.flags[2].time[index].flagBg
 					if (this.flags[2].time[index].flagBg) {
-						this.flags[2].time[index].bgColor = '#FFFFFF'
+						this.flags[2].time[index].bgColor = '#F1F1F1'
 						this.count--
 					} else {
 						this.flags[2].time[index].bgColor = '#FFBD27'
@@ -432,7 +432,7 @@
 				} else if (group == 2) {
 					this.flags[2].distance[index].flagBg = !this.flags[2].distance[index].flagBg
 					if (this.flags[2].distance[index].flagBg) {
-						this.flags[2].distance[index].bgColor = '#FFFFFF'
+						this.flags[2].distance[index].bgColor = '#F1F1F1'
 						this.count--
 					} else {
 						this.flags[2].distance[index].bgColor = '#FFBD27'
