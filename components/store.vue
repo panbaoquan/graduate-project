@@ -12,7 +12,7 @@
 			<view class="stores-item-rightContent">
 				<view class="stores-item-rightContent-top">
 				<view class="store-title">
-					KFC肯德鸡
+					肯德鸡宅急送
 				</view>
 				<view class="store-firstLine">
 					<view class="store-firstLine-evaluate">
