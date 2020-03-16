@@ -145,7 +145,7 @@
 					<view class="group-select-speed" v-show="flags[2].flag_dropdown_list">
 						<view class="group-select-speed-onSpeed">
 							<view class="group-select-speed-onSpeed-item" @tap="changeBackgroundColor(index,1)" v-for="(item,index) in flags[2].time"
-							 :key="index" :style="{backgroundColor:'#F1F1F1'}">
+							 :key="index" :style="{backgroundColor:item.bgColor}">
 								{{item.content}}
 							</view>
 						</view>
@@ -154,7 +154,7 @@
 				
 				
 							<view class="group-select-speed-underDistance-item" @tap="changeBackgroundColor(index,2)" v-for="(item,index) in flags[2].distance"
-							 :key="index" :style="{backgroundColor:'#F1F1F1'}">
+							 :key="index" :style="{backgroundColor:item.bgColor}">
 								{{item.content}}
 							</view>
 						</view>
@@ -239,45 +239,45 @@
 						flag_dropdown_list: false,
 						time: [{
 								content: '30分钟内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 
 							},
 							{
 								content: '40分钟内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							},
 							{
 								content: '50分钟内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							},
 							{
 								content: '60分钟内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							}
 						],
 						distance: [{
 								content: '1km以内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 
 							},
 							{
 								content: '2km以内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							},
 							{
 								content: '3km以内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							},
 							{
 								content: '5km以内',
-								bgColor: '#FFFFFF',
+								bgColor: '#F1F1F1',
 								flagBg: true
 							}
 						]
