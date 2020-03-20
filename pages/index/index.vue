@@ -35,7 +35,7 @@
 				</swiper>
 				<!-- 分类 -->
 				<view class="block" >
-					<view class="block-section" v-for="(item,index) in menus" :key="index">
+					<view class="block-section" v-for="(item,index) in menus" :key="index" @tap="switchPage(index)">
 						<image :src="item.iconPath" mode=""></image>
 						<view>
 							<text class="classify-item-title">{{item.name}}</text>
@@ -394,6 +394,18 @@
 			
 		},
 		methods: {
+			//分类，切换分页
+			switchPage(index) {
+			  switch (index+1) {
+				  case 1:
+				  uni.navigateTo({
+				  	url:'./dessertDrink/dessertDrink'
+				  })
+				  default:break;
+			  }
+			},
+			
+			//通过设置滚动条高度，实现附近商家栏的固定
 			currentScroll () {
 				uni.pageScrollTo({
 				    scrollTop: 386,  //距离页面顶部的距离
