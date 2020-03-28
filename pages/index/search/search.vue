@@ -8,21 +8,42 @@
 			:hot-list="hotList" @getSearchText="getSearchText"></zy-search>
 	
 		<text @tap='goBack'>返回</text>
+		<!--Test远程接口-->
+		<view class="test">
+			<span v-for="item in myTestData" :key="item.id">
+				<span v-show="item.id==3?true:false">-</span>
+				{{item.name}}
+				<span v-show="item.id==1?true:false">,</span>
+				<span v-show="item.id==3?true:false">-</span>
+			</span>
+		</view>
 	</view>
 </template>
 
 <script>
 	import zySearch from '../../../components/zy-search/zy-search.vue'
 	export default {
-		components: {
-			zySearch
-		},
 		data() {
 			return {
 				themeClass: 'block',
 				speechEngine: 'baidu', //语音识别引擎
-				hotList: ['栏目1','栏目2','栏目3','栏目4']	//初始化推荐列表
+				hotList: ['栏目1','栏目2','栏目3','栏目4'],	//初始化推荐列表
+				myTestData:''
 			}
+		},
+		onShow(){
+			uni.request({
+			    url: 'http://rap2.taobao.org:38080/app/mock/248904/login', //仅为示例，并非真实接口地址。
+			    data: {
+			        userName: 'Test',
+					password:'123'
+			    },
+			   method:'POST',
+			    success: (res) => {
+					this.myTestData = res.data.data
+					
+			    }
+			});
 		},
 		methods: {
 			getSearchText(e) {
@@ -36,6 +57,9 @@
 				    delta: 1
 				});
 			}
+		},
+		components: {
+			zySearch
 		},
 	}
 </script>

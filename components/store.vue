@@ -12,7 +12,7 @@
 			<view class="stores-item-rightContent">
 				<view class="stores-item-rightContent-top">
 				<view class="store-title">
-					肯德鸡宅急送
+					{{index}}肯德鸡宅急送
 				</view>
 				<view class="store-firstLine">
 					<view class="store-firstLine-evaluate">
@@ -37,6 +37,11 @@
 </template>
 
 <script>
+	export default {
+		props:{
+			index:Number
+		}
+	}
 </script>
 
 <style lang="scss">
