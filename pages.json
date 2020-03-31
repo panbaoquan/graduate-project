@@ -2,75 +2,74 @@
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
-			"style":{
+			"style": {
 				// "backgroundColor":"#0077AA",
 				// "backgroundColorBottom":"#000000",
 				// "backgroundColorTop":"#007AFF"
 			}
 		},
 		{
-            "path" : "pages/member/member",
-            "style" : {}
-        }
-	    ,{
-            "path" : "pages/mine/mine",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/order/order",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/index/search/search",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/index/dessertDrink/dessertDrink",
-            "style" : {}
-        }
-    ],
+			"path": "pages/member/member",
+			"style": {}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {}
+		},
+		{
+			"path": "pages/index/search/search",
+			"style": {}
+		},
+		{
+			"path": "pages/index/dessertDrink/dessertDrink",
+			"style": {}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
-		"navigationStyle":"custom"
+		"navigationStyle": "custom"
 	},
 	"tabBar": {
-		"color" : "#7A7E83",
-		"selectedColor" : "#007AFF",
-		"borderStyle" : "black",
-		"backgroundColor" : "#F8F8F8",
-		"fontSize":"12px",
-		"list":[
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"fontSize": "12px",
+		"list": [
 			{
-			    "pagePath" : "pages/index/index",
-			    "text" : "首页",
-				"iconPath":"static/images/icon-index.png",
-				"selectedIconPath":"static/images/icon-index-selected.png"
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/images/icon-index.png",
+				"selectedIconPath": "static/images/icon-index-selected.png"
 			},
 			{
-			    "pagePath" : "pages/member/member",
-			    "text" : "会员",
-				"iconPath":"static/images/icon-member.png",
-				"selectedIconPath":"static/images/icon-member-selected.png"
-				
+				"pagePath": "pages/member/member",
+				"text": "会员",
+				"iconPath": "static/images/icon-member.png",
+				"selectedIconPath": "static/images/icon-member-selected.png"
 			},
 			{
-				"pagePath":"pages/order/order",
-				"text":"订单",
-				"iconPath":"static/images/icon-order.png",
-				"selectedIconPath":"static/images/icon-order-selected.png"
+				"pagePath": "pages/order/order",
+				"text": "订单",
+				"iconPath": "static/images/icon-order.png",
+				"selectedIconPath": "static/images/icon-order-selected.png"
 			},
 			{
-				"pagePath":"pages/mine/mine",
-				"text":"我的",
-				"iconPath":"static/images/icon-mine.png",
-				"selectedIconPath":"static/images/icon-mine-selected.png"
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "static/images/icon-mine.png",
+				"selectedIconPath": "static/images/icon-mine-selected.png"
 			}
 		]
 	},
-	"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [
 			{
@@ -80,5 +79,4 @@
 			}
 		]
 	}
-	
 }

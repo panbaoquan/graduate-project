@@ -13,7 +13,6 @@ export default {
 </script>
 <style>
 /*每个页面公共css */
-
 /*字体样式*/
 @import "./common/font/iconfont.css";
 
