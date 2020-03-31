@@ -1,6 +1,6 @@
 <template>
   <view class="avatar">
-    <view class="avatar-left">
+    <view class="avatar-left" @click="toPerson">
       <view><Icon icon="icon-touxiang" size="30"></Icon></view>
       <text>用户0291020192</text>
     </view>
@@ -16,6 +16,11 @@ import Icon from "../../../components/icon/index.vue";
 export default {
   data() {
     return {};
+  },
+  methods: {
+    toPerson() {
+      uni.navigateTo({ url: "/pages/mine/personal-information/index" });
+    }
   },
   components: {
     Icon

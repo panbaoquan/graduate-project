@@ -3,7 +3,7 @@
 		<view class="stores-item" >
 			<view class="stores-item-leftLogo">
 				<view class="stores-item-leftLogo-top">
-				<image src="../../static/images/storesLogo/KFC-logo.jpg" mode="aspectFill"></image>
+				<image src="@/static/images/storesLogo/KFC-logo.jpg" mode="aspectFill"></image>
 				</view>
 				<view class="stores-item-leftLogo-bottom">
 					<!--占位-->
@@ -16,7 +16,7 @@
 				</view>
 				<view class="store-firstLine">
 					<view class="store-firstLine-evaluate">
-						<image  class="store-firstLine-evaluate-rate" src="../../static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
+						<image  class="store-firstLine-evaluate-rate" src="@/static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
 					</view>
 					<view class="store-firstLine-arrivalTime">
 						<text>30分钟</text>
