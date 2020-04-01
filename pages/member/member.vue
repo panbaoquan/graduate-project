@@ -1,8 +1,6 @@
 <template>
 	<view>
-		<view class="status_bar">
-			<!-- 这里是状态栏 -->
-		</view>
+		<top-bar></top-bar>
 		会员
 		<search></search>
 	</view>
@@ -10,6 +8,7 @@
 
 <script>
 	import search from '../../components/zy-search/zy-search.vue'
+	import topBar from '../../components/topbar/topBar.vue'
 	export default {
 		data() {
 			return {
@@ -17,15 +16,12 @@
 			};
 		},
 		components:{
-			search
+			search,
+			topBar
 		}
 	}
 </script>
 
 <style lang="scss">
-	.status_bar {
-		height: var(--status-bar-height);
-		width: 100%;
-		background-image: linear-gradient(-135deg, #FFBD27 0%, #FFD161 100%);
-	}
+
 </style>

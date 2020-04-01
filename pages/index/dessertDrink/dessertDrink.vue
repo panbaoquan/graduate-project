@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<view class="status_bar"><!-- 这里是状态栏 --></view>
 		<view class="title">
 			 <view class="title-backIcon" @tap="goback">
 			 	<image src="../../../static/images/goback.png" mode=""></image>
@@ -12,7 +11,6 @@
 			 	<!--占位-->
 			 </view>
 		</view>
-		
 	</view>
 </template>
 
@@ -45,12 +43,13 @@
 .title {
 	display: flex;
 	background-color: rgb(235,89,120);
-	padding-top: 20px;
+	padding-top: 50px;
 	&-backIcon {
 		flex: 1;
 		&>image {
 			width: 18px;
 			height: 18px;
+			margin-left: 12px;
 		}
 	}
 	&-content {

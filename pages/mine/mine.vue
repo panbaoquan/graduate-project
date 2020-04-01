@@ -17,6 +17,7 @@
 import Icon from "../../components/icon/index.vue";
 import Avatar from "./components/avatar.vue";
 import Block from "./components/block";
+import topBar from "../../components/topbar/topBar.vue"
 export default {
   data() {
     return {
@@ -48,7 +49,8 @@ export default {
   components: {
     Icon,
     Avatar,
-    Block
+    Block,
+	topBar
   }
 };
 </script>
@@ -60,7 +62,8 @@ page {
 .status_bar {
   height: var(--status-bar-height);
   width: 100%;
-  background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%);
+  //background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%);
+  background-color:  #f7f7f7;
 }
 .my {
   background-color: #f7f7f7;
