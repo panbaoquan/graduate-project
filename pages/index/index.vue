@@ -14,10 +14,7 @@
 				<Recommend :isTop="isTop"/>
 				<!--店铺-->
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
-				   
-					<view :class="{stores_seat:isTop}">
-						
-					</view>
+					<view :class="{stores_seat:isTop}"></view>
 					<!--单独商店-->
 					<store v-for="(item,index) in 15" :index='index'></store>
 				</scroll-view>
@@ -32,7 +29,6 @@
 		uniSearchBar,
 		uniSwiperDot
 	} from '@dcloudio/uni-ui'
-
 	import store from '../../components/store.vue'
 	import topBar from "../../components/topbar/topBar.vue"
 	import searchBar from './components/searchBar.vue'
@@ -77,13 +73,6 @@
 
 		},
 		methods: {
-			//通过设置滚动条高度位置，实现附近商家栏的固定
-			// currentScroll() {
-			// 	uni.pageScrollTo({
-			// 		scrollTop: 390, //距离页面顶部的距离
-			// 		duration: 100
-			// 	});
-			// },
 
 			scroll: function(e) {
 				console.log(e)

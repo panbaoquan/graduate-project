@@ -4286,65 +4286,20 @@ var render = function() {
         },
         [_vm._v("返回")]
       ),
+      _c("v-uni-view", { attrs: { _i: 4 } }, [
+        _vm._v("\n\t\tTest远程接口\n\t")
+      ]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
-        _vm._l(_vm._$g(5, "f"), function(item, $10, $20, $30) {
-          return _c(
-            "span",
-            { key: item, attrs: { _i: "5-" + $30 } },
-            [
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm._$g("6-" + $30, "v-show"),
-                      expression: "_$g((\"6-\"+$30),'v-show')"
-                    }
-                  ],
-                  attrs: { _i: "6-" + $30 }
-                },
-                [_vm._v("-")]
-              ),
-              _vm._v(_vm._$g("5-" + $30, "t1-0")),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm._$g("7-" + $30, "v-show"),
-                      expression: "_$g((\"7-\"+$30),'v-show')"
-                    }
-                  ],
-                  attrs: { _i: "7-" + $30 }
-                },
-                [_vm._v(",")]
-              ),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm._$g("8-" + $30, "v-show"),
-                      expression: "_$g((\"8-\"+$30),'v-show')"
-                    }
-                  ],
-                  attrs: { _i: "8-" + $30 }
-                },
-                [_vm._v("-")]
-              )
-            ],
-            1
-          )
-        }),
-        1
+        {
+          attrs: { _i: 5 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("\n\t\t地图显示\n\t")]
       )
     ],
     1
