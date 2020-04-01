@@ -16,7 +16,7 @@ export default {
       default: "#999"
     },
     size: {
-      default: "18"
+      default: "20"
     }
   },
   data() {

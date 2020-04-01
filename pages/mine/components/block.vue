@@ -2,7 +2,7 @@
  * @Author: wangzhongjie
  * @Date: 2020-03-31 09:33:28
  * @LastEditors: wangzhongjie
- * @LastEditTime: 2020-03-31 10:11:23
+ * @LastEditTime: 2020-04-01 15:27:48
  * @Description: 我的功能
  * @Email: UvDream@163.com
  -->
@@ -41,7 +41,7 @@ export default {
 <style scoped lang="less">
 .func {
   width: ~"calc(100% - 40rpx)";
-  margin: 20rpx auto;
+  margin: 20px auto;
   background-color: #fff;
   min-height: 200rpx;
   border-radius: 10rpx;
@@ -56,7 +56,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     &-word {
-      font-size: 10rpx;
+      font-size: 20rpx;
       margin-top: 20rpx;
     }
     & > view {

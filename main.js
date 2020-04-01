@@ -7,9 +7,9 @@ Vue.config.productionTip = false
 Vue.use(Icon)
 
 App.mpType = 'app'
-iconfontVersion.forEach(ele => {
-  loadStyle(iconfontUrl.replace('$key', ele));
-})
+// iconfontVersion.forEach(ele => {
+//   loadStyle(iconfontUrl.replace('$key', ele));
+// })
 
 const app = new Vue({
     ...App,
