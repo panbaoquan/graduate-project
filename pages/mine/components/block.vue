@@ -2,7 +2,7 @@
  * @Author: wangzhongjie
  * @Date: 2020-03-31 09:33:28
  * @LastEditors: wangzhongjie
- * @LastEditTime: 2020-04-01 15:27:48
+ * @LastEditTime: 2020-04-01 16:39:44
  * @Description: 我的功能
  * @Email: UvDream@163.com
  -->
@@ -12,7 +12,7 @@
     <view class="func-content">
       <view v-for="(item, index) in list" :key="index">
         <view>
-          <Icon :icon="item.icon" color="red" :size="item.size" />
+          <Icon :icon="item.icon" :color="'#ee3f4d'" :size="item.size" />
         </view>
         <view class="func-content-word">{{ item.name }}</view>
       </view>
