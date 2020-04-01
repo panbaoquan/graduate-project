@@ -70,10 +70,12 @@
 <script>
 	export default {
 		props:{
-			isTop:''
+			isTop:'',
+			
 		},
 		data() {
 			return {
+				count:0,
 				flags: [{
 						name: '综合排序',
 						flagValue: true,
