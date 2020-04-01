@@ -24,7 +24,11 @@
 				}, {
 					content: '',
 					bgcolor: 'blue'
-				}],
+				},{
+					content:'',
+					bgcolor:'skyblue'
+				}
+				],
 			}
 		},
 		methods:{}
