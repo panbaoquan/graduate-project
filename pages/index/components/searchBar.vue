@@ -2,7 +2,7 @@
 	<view class="searchBarwidth">
 		<view>
 			<view class="bar" @tap="searchPage">
-				<image src="../../static/images/search.png" mode=""></image>
+				<image src="@/static/images/search.png" mode=""></image>
 			    <input type="text" value="" placeholder="请输入要搜索的内容" />
 			</view>
 			
