@@ -60,7 +60,7 @@ page {
 .status_bar {
   height: var(--status-bar-height);
   width: 100%;
-  background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%);
+  background-image: linear-gradient(-135deg, #ee3f4d 0%, #ee3f4d 100%);
 }
 .my {
   background-color: #f7f7f7;
