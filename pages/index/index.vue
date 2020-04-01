@@ -16,7 +16,7 @@
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
 					<view :class="{stores_seat:isTop}"></view>
 					<!--单独商店-->
-					<store v-for="(item,index) in 15" :index='index'></store>
+					<store v-for="(item,index) in 15" :index='index' :key="index"></store>
 				</scroll-view>
 			</view>
 		</scroll-view>

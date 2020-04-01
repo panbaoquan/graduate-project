@@ -33,6 +33,6 @@
 	.status_bar {
 		height: var(--status-bar-height);
 		width: 100%;
-		background-image: linear-gradient(-135deg, #FFBD27 0%, #FFD161 100%);
+		background-image: linear-gradient(-135deg, #DA4138 0%, #D43A32 100%);
 	}
 </style>
