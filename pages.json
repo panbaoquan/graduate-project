@@ -26,7 +26,10 @@
 		},
 		{
 			"path": "pages/index/dessertDrink/dessertDrink",
-			"style": {}
+			"style": {
+				"backgroundColor":"#007AFF"
+			}
+			
 		},
 		{
 			"path": "pages/mine/personal-information/index",

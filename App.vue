@@ -1,4 +1,5 @@
 <script>
+	
 export default {
   onLaunch: function() {
     console.log("App Launch");
@@ -23,5 +24,6 @@ export default {
  /* background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%); */
 
 }
+
 
 </style>

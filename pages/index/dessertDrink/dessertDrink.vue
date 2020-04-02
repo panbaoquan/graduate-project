@@ -1,8 +1,9 @@
 <template>
-	<view>
+	<scroll-view class="dessertDrink">
 		<view class="title">
 			 <view class="title-backIcon" @tap="goback">
-			 	<image src="../../../static/images/goback.png" mode=""></image>
+			 	 <Icon icon="icon-fanhui" color='#FFF' size="20"
+				  style="margin-left:10px;"></Icon>
 			 </view> 
 			 <view class="title-content">
 				  甜点饮品
@@ -11,10 +12,17 @@
 			 	<!--占位-->
 			 </view>
 		</view>
-	</view>
+		
+		<filterList/>
+		<view class="content">
+			
+		</view>
+	</scroll-view>
 </template>
 
 <script>
+	import filterList from '../../../components/filterList.vue'
+	import Icon from '../../../components/icon/index.vue'
 	export default {
 		data() {
 			return {
@@ -23,34 +31,39 @@
 		},
 		methods:{
 			goback(){
-				console.log(1)
 				uni.navigateBack({
 					    delta: 1,
 					    animationType: 'pop-out',
 					    animationDuration: 200
 				})
 			}
+		},
+		components:{
+			filterList,
+			Icon
 		}
 	}
 </script>
 
 <style lang="scss">
+page {
+	  background-color: #f7f7f7;
+}
 .status_bar {
 	background-image: none;
 	background-color: rgb(235,89,120);
 	
 }
+
 .title {
 	display: flex;
 	background-color: rgb(235,89,120);
 	padding-top: 50px;
 	&-backIcon {
 		flex: 1;
-		&>image {
-			width: 18px;
-			height: 18px;
-			margin-left: 12px;
-		}
+		display: flex;
+		align-items: center;
+		
 	}
 	&-content {
 		flex: 1;
@@ -61,5 +74,8 @@
 	&-right {
 		flex: 1;
 	}
+}
+.content{
+margin: 0 10px;
 }
 </style>

@@ -31,7 +31,7 @@
 	} from '@dcloudio/uni-ui'
 	import store from '../../components/store.vue'
 	import topBar from "../../components/topbar/topBar.vue"
-	import searchBar from './components/searchBar.vue'
+	import searchBar from '../../components/searchBar.vue'
 	import mySwiper from './components/swiper.vue'
 	import categoryBar from './components/categoryBar.vue'
 	import Recommend from './components/recommend-shops/recommend.vue'

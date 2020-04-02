@@ -1,11 +1,8 @@
 <template>
 	<view>
-		    <view class="status_bar">
-		    	<!-- 这里是状态栏 -->
-		    </view>
+		    <top-bar></top-bar>
 			<zy-search :is-focus="false" :theme="themeClass" :show-want="true" :speechEngine="speechEngine"
 			:hot-list="hotList" @getSearchText="getSearchText"></zy-search>
-	
 		<text @tap='goBack'>返回</text>
 		<view>
 			Test远程接口
@@ -26,6 +23,7 @@
 
 <script>
 	import zySearch from '../../../components/zy-search/zy-search.vue'
+	import topBar from '../../../components/topbar/topBar.vue'
 	export default {
 		data() {
 			return {
@@ -76,10 +74,11 @@
 			
 		},
 		components: {
-			zySearch
+			zySearch,
+			topBar
 		},
 	}
 </script>
-<style>
+<style scoped lang="scss">
 
 </style>
