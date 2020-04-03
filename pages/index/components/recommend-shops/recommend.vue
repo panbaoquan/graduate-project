@@ -9,8 +9,8 @@
 			<view class="nearStone-select">
 				<view class="nearStone-select-group" v-for="(item,index) in flags" :key="index" @tap="selectFlag(item.flagValue,item.flagName)">
 					{{item.name}}
-					<text class="iconfont icon_arrowDown" v-show="item.flagValue"></text>
-					<text class="iconfont icon_arrowTop" v-show="!item.flagValue"></text>
+					<text class="iconfont icon-arrowDown" v-show="item.flagValue"></text>
+					<text class="iconfont icon-arrowTop" v-show="!item.flagValue"></text>
 				</view>
 			</view>
 			<!--综合排序-下拉模块-->
@@ -39,10 +39,7 @@
 						{{item.content}}
 					</view>
 				</view>
-	
 				<view class="group-select-speed-underDistance">
-	
-	
 					<view class="group-select-speed-underDistance-item" @tap="changeBackgroundColor(index,2)" v-for="(item,index) in flags[2].distance"
 					 :key="index" :style="{backgroundColor:item.bgColor}">
 						{{item.content}}
@@ -287,11 +284,11 @@
 	}
 	//箭头
 	.icon {
-		&_arrowDown {
+		&-arrowDown {
 			font-size: 15rpx;
 		}
 	
-		&_arrowTop {
+		&-arrowTop {
 			font-size: 15rpx;
 		}
 	}

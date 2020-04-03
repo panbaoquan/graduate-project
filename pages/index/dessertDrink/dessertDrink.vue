@@ -1,5 +1,6 @@
 <template>
 	<scroll-view class="dessertDrink">
+		<!--标题栏-->
 		<view class="title">
 			 <view class="title-backIcon" @tap="goback">
 			 	 <Icon icon="icon-fanhui" color='#FFF' size="20"
@@ -12,10 +13,13 @@
 			 	<!--占位-->
 			 </view>
 		</view>
-		
+	    <!--搜索栏-->
+		<search-bar></search-bar>
+		<!--过滤列表-->
 		<filterList/>
 		<view class="content">
-			
+		<!--过滤菜单-->
+		 <filter-menus></filter-menus>
 		</view>
 	</scroll-view>
 </template>
@@ -23,6 +27,8 @@
 <script>
 	import filterList from '../../../components/filterList.vue'
 	import Icon from '../../../components/icon/index.vue'
+	import filterMenus from '../../../components/filterMenus.vue'
+	import searchBar from '../../../components/searchBar.vue'
 	export default {
 		data() {
 			return {
@@ -40,7 +46,9 @@
 		},
 		components:{
 			filterList,
-			Icon
+			Icon,
+			filterMenus,
+			searchBar
 		}
 	}
 </script>

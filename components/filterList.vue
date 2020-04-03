@@ -90,7 +90,7 @@
 		display: flex;
 
 		&_item {
-			margin-left: 15px;
+			margin-left: 12px;
 			display: flex;
 			width: 75px;
 			flex-wrap: wrap;
@@ -99,7 +99,6 @@
 			&_content {
 				width: 50px;
 				height: 50px;
-
 				background-color: #FFFFFF;
 				border-radius: 50%;
 				display: flex;
@@ -125,7 +124,7 @@
 	.activeTitle {
 		background-color: rgb(234, 61, 81);
 		color: #FFFFFF;
-		font-weight: 535;
+		font-weight: 450;
 		border-radius: 8px;
 		padding: 0 5px;
 	}
@@ -133,6 +132,7 @@
 	.activeContent {
 		background-image: linear-gradient(rgba(234, 61, 81, .45),
 			rgba(234, 61, 81, .15),
-			rgba(234, 61, 81, 0));
+			rgba(234, 61, 81, 0)
+			);
 	}
 </style>
