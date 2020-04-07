@@ -19,7 +19,12 @@
 		<filterList/>
 		<view class="content">
 		<!--过滤菜单-->
-		 <filter-menus></filter-menus>
+		<filter-menus></filter-menus>
+		<!--商店列表-->
+		<Store page='detail' 
+		v-for="(item,index) in 10" :index="index"
+		:shop="shop"
+		/>
 		</view>
 	</scroll-view>
 </template>
@@ -29,11 +34,21 @@
 	import Icon from '../../../components/icon/index.vue'
 	import filterMenus from '../../../components/filterMenus.vue'
 	import searchBar from '../../../components/searchBar.vue'
+	import Store from '../../../components/store.vue'
 	export default {
 		data() {
 			return {
-				
+			shop:{
+				name:'一點點',
+				logoSrc:"../../../static/images/yidiandian.jpg"
+			}	
 			};
+		},
+		onLoad() {
+			
+		},
+		onShow() {
+			
 		},
 		methods:{
 			goback(){
@@ -42,13 +57,15 @@
 					    animationType: 'pop-out',
 					    animationDuration: 200
 				})
+				
 			}
 		},
 		components:{
 			filterList,
 			Icon,
 			filterMenus,
-			searchBar
+			searchBar,
+			Store
 		}
 	}
 </script>
@@ -60,7 +77,6 @@ page {
 .status_bar {
 	background-image: none;
 	background-color: rgb(235,89,120);
-	
 }
 
 .title {

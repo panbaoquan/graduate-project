@@ -35,7 +35,12 @@
 			"path": "pages/mine/personal-information/index",
 			"style": {}
 		}
-	],
+	    
+        ,{
+            "path" : "pages/storeDetail/index",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

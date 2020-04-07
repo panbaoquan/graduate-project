@@ -16,7 +16,12 @@
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
 					<view :class="{stores_seat:isTop}"></view>
 					<!--单独商店-->
-					<store v-for="(item,index) in 15" :index='index' :key="index"></store>
+					<store v-for="(item,index) in 15" 
+					:index='index' 
+					:key="index"
+					 page='index'
+					 :shop="shop"
+					></store>
 				</scroll-view>
 			</view>
 		</scroll-view>
@@ -49,11 +54,20 @@
 					scrollTop: 0
 				},
 				scrollHeight: 0,
+				shop:{
+					id:1,
+					name:'肯德基宅急送',
+					logoSrc:'/static/images/storesLogo/KFC-logo.jpg'
+				}
 			}
 		},
 		//页面生命周期函数
-		onLoad(){},
-		onShow() {},
+		onLoad(){
+			
+		},
+		onShow() {
+
+		},
 		onReady() {},
 		//监听页面滚动高度事件
 		onPageScroll: function(e){ //nvue暂不支持滚动监听，可用bindingx代替

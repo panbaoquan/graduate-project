@@ -215,7 +215,7 @@
 <style lang="scss">
 	.filterMenus {
 		width: 100%;
-
+        margin: 10px auto;
 		&_title {
 			padding: 20px 0 20px 13px;
 

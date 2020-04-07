@@ -13,7 +13,6 @@
 			</view>
 		</view>
 	</scroll-view>
-
 </template>
 
 <script>

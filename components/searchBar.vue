@@ -22,9 +22,20 @@
 		
 		methods:{
 			searchPage() {
-				uni.navigateTo({
-					url:'../search/search'	
-				})
+				let pages = getCurrentPages()
+				for(let i=0;i<pages.length;i++) {
+				  if(pages[i].route==='pages/index/dessertDrink/dessertDrink') {
+					  uni.navigateTo({
+					  	url:'../search/search'	
+					  })
+				  }
+				  else if (pages[i].route==='pages/index/index') {
+					  uni.navigateTo({
+					  	url:'../index/search/search'
+					  })
+				  }
+				 
+				}
 			},
 		}
 	}
