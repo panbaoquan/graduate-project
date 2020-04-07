@@ -80,8 +80,7 @@
             "treeShaking" : {
                 "enable" : true
             }
-        }
-		
+        },
+        "title" : "waimai"
     }
-	
 }
