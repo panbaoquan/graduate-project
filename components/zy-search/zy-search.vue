@@ -1,16 +1,15 @@
 <template name="zy-search">
 	<view>
 		<view class="search">
-			<!-- #ifdef APP-PLUS -->
-				<image src="../../static/zy-search/voice.svg" mode="aspectFit" @click="startRecognize()" class="voice-icon"></image>
-			<!-- #endif -->
+				<image src="@/static/images/voice.png" mode="aspectFit" @click="startRecognize()" class="voice-icon"></image>
 			<template v-if="isFocus">
 				<input maxlength="20" focus type="text" value="" confirm-type="search" @confirm="searchStart()" placeholder="请输入关键词搜索" v-model.trim="searchText"/>
 			</template>
 			<template v-else>
 				<input maxlength="20" type="text" value="" confirm-type="search" @confirm="searchStart()" placeholder="请输入关键词搜索" v-model.trim="searchText"/>
 			</template>
-			<image src="../../static/zy-search/search.svg" mode="aspectFit" @click="searchStart()" class="search-icon"></image>
+			<image src="@/static/images/search.png" mode="aspectFit" @click="searchStart()" class="search-icon"></image>
+		    <span class="search_cancel" @click="goBack()">取消</span>
 		</view>
 		<view :class="'s-' + theme" v-if="hList.length > 0">
 			<view class="header">
@@ -132,6 +131,11 @@
 				plus.speech.startRecognize(options, function(s) {
 					_this.searchText = _this.searchText + s;
 				});
+			},
+			goBack() {
+				uni.navigateBack({
+					delta:1
+				})
 			}
 		}
 	}
@@ -145,12 +149,18 @@
 		background-image: linear-gradient(-135deg, #FFBD27 0%, #FFD161 100%);
 	}
 	.search{
-		width: 640upx;
-		margin: 30upx auto 0;
+		width: 85%;
+		margin: 30upx 10px 0 10px;
 		position: relative;
+		&_cancel {
+			position: absolute;
+			    right: -40px;
+			    top: 8px;
+			    font-size: 16px;
+		}
 		input{
 			background-color: #F7F7F7;
-			padding: 10upx 74upx;
+			padding: 10px 74upx;
 			font-size: 28upx;
 			border-radius: 50upx;
 		}
@@ -160,7 +170,7 @@
 			padding: 16upx 20upx 16upx 0;
 			position: absolute;
 			left: 16upx;
-			top: 4upx;
+			top: 2px;
 			z-index: 10;
 		}
 		.search-icon{
@@ -169,7 +179,7 @@
 			padding: 16upx 20upx 16upx 0;
 			position: absolute;
 			right: 0;
-			top: -2upx;
+			top: 2px;
 			z-index: 10;
 		}
 	}

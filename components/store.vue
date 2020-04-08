@@ -1,9 +1,10 @@
 <template>
 	<view>
-		<view class="stores-item" >
+		<navigator url="@pages/storeDetail/index">
+		<view class="stores-item" @click="detail()">
 			<view class="stores-item-leftLogo">
 				<view class="stores-item-leftLogo-top">
-				<image src="../../static/images/storesLogo/KFC-logo.jpg" mode="aspectFill"></image>
+				<image :src="shop.logoSrc" mode="aspectFill"></image>
 				</view>
 				<view class="stores-item-leftLogo-bottom">
 					<!--占位-->
@@ -12,11 +13,11 @@
 			<view class="stores-item-rightContent">
 				<view class="stores-item-rightContent-top">
 				<view class="store-title">
-					肯德鸡宅急送
+					{{index}}{{shop.name}}
 				</view>
 				<view class="store-firstLine">
 					<view class="store-firstLine-evaluate">
-						<image  class="store-firstLine-evaluate-rate" src="../../static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
+						<image  class="store-firstLine-evaluate-rate" src="@/static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
 					</view>
 					<view class="store-firstLine-arrivalTime">
 						<text>30分钟</text>
@@ -28,20 +29,57 @@
 				</view>
 				</view>
 				<view class="stores-item-rightContent-bottom">
-					更多活动尽请期待
+				   <span v-show="page==='index'?true:false">更多活动尽请期待</span>
+				   <view v-show="page==='detail'?true:false" 
+				   class="stores-item-rightContent-bottom_products">
+				   	<image src="/static/images/tea.jpg" mode="aspectFill"></image>
+					<image src="/static/images/tea.jpg" mode="aspectFill"></image>
+					<image src="/static/images/tea.jpg" mode="aspectFill"></image>
+				   </view>
 				</view>
 			</view>
 		</view>
+		</navigator>
 	</view>
 	
 </template>
 
 <script>
+	export default {
+		props:{
+			index:Number,
+			page:String,
+			shop:''
+		},
+		onLoad() {
+			
+		},
+		methods:{
+			detail(){
+				//跳转详情页面
+				// url:'../pages/storeDetail/index',
+				let pages = getCurrentPages()
+				let page = (pages[pages.length - 1]).route
+				if(page==='pages/index/index'){
+					uni.navigateTo({
+						url:'/pages/storeDetail/index?id='+this.shop.id
+					})
+				}else {
+					uni.navigateTo({
+						url:'../../storeDetail/index?id='+this.shop.id
+					})
+				}
+				
+				
+			}
+		}
+	}
 </script>
 
 <style lang="scss">
 	//store布局
 	.stores-item {
+		    min-height: 85px;
 			display: flex;
 			padding: 10px;
 	        border-radius: 8px; 
@@ -59,20 +97,30 @@
 					}
 				}
 				&-bottom {
-					height: 30px;
+					min-height: 30px;
 				}
 			}
 			&-rightContent {
 				width: 77%;
-				
+				min-height: 85px;
 				&-top {
 					height: 50px;
-					
 				}
 				&-bottom {
 					font-size: 12px;
-					height: 30px;
 					padding-top: 5px;
+					min-height: 30px;
+					//更新图片
+					&_products {
+						padding-top: 10px;
+						display: flex;
+						justify-content: space-between;
+						&>image {
+							width: 80px;
+							height: 100px;
+							border-radius: 8px;
+						}
+					}
 				}
 			}
 	}
@@ -104,17 +152,14 @@
 				 &-arrivalTime {
 					 flex: 1;
 					 text-align: right;
-					 
 					 &>text:nth-child(2) {
 					    padding-left: 5px;
-						
 					 }
 				 }
 			 }
 			 &-secondLine {
 				 font-size: 12px;
 				 &>text {
-					 
 					 padding-right: 6px;
 				 }
 			 }
