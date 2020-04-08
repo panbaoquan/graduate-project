@@ -22,13 +22,13 @@
 		<filter-menus></filter-menus>
 		<!--商店列表-->
 		<Store page='detail' 
-		v-for="(item,index) in 10" :index="index"
-		:shop="shop"
+		v-for="(item,index) in shops" 
+		:index="item.id"
+		:shop="item"
 		/>
 		</view>
 	</scroll-view>
 </template>
-
 <script>
 	import filterList from '../../../components/filterList.vue'
 	import Icon from '../../../components/icon/index.vue'
@@ -38,10 +38,33 @@
 	export default {
 		data() {
 			return {
-			shop:{
-				name:'一點點',
-				logoSrc:"../../../static/images/yidiandian.jpg"
-			}	
+			shops:[
+				{
+				    id:1,
+				    name:'一點點',
+				    logoSrc:"../../../static/images/yidiandian.jpg"
+		     	},
+				{
+					id:2,
+					name:'奈雪の茶',
+					logoSrc:"../../../static/images/yidiandian.jpg"
+				},
+				{
+					id:3,
+					name:'贡茶',
+					logoSrc:"../../../static/images/yidiandian.jpg"
+				},
+				{
+					id:4,
+					name:'辛巴克',
+					logoSrc:"../../../static/images/yidiandian.jpg"
+				},
+				{
+					id:5,
+					name:'甜啦啦',
+					logoSrc:"../../../static/images/yidiandian.jpg"
+				}
+			]	
 			};
 		},
 		onLoad() {

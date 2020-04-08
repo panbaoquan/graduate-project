@@ -20,7 +20,7 @@
 					:index='index' 
 					:key="index"
 					 page='index'
-					 :shop="shop"
+					:shop="shop"
 					></store>
 				</scroll-view>
 			</view>
