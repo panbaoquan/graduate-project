@@ -18,14 +18,14 @@
 			<!--右边内容-->
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375upx)"
 			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain">
-				<view class="padding-top padding-lr" v-for="(item,index) in list" :key="index" :id="'main-'+index">
+				<view class="myPadding" v-for="(item,index) in list" :key="index" :id="'main-'+index">
 					<view class="cu-bar solid-bottom bg-white">
 						<view class="action">
 							<text class="cuIcon-title text-green"></text> Tab-{{item.name}}</view>
 					</view>
 					<view class="cu-list menu-avatar">
 						<!--我添加的-->
-					  <view class="myList">
+					  <view class="myList" v-for="(item,index) in 3" :key="index">
 						  <view class="myList_left">
 						  	<view class="myList_left_img">
 						  		<image src="@/static/images/shops/goodsImg.jpg" mode="aspectFill"></image>
@@ -55,11 +55,13 @@
 							</view>
 							<view class="myList_right_btn">
 								<view class="myList_right_btn_minprice">
-									<span class="minprice">0</span><span style="color: red;">¥</span>元 
+									<span class="minprice">10</span><span style="color: red;">¥</span>元 
 								</view>
 								<view class="myList_right_btn_btns">
-									<view class="add flexc bold" @tap="add($event,item.id)">+</view>
-                      				<number-box></number-box>				
+									<!-- <Counter :id="item.id" :rect="cartBasketRect"/> -->
+									<view class="minus">-</view>
+									 <viwe class="counter">{{counter}}</viwe>
+									<view class="add flexc bold" @tap="add($event,index+1)">+</view>
 								</view>
 							</view>
 							
@@ -80,8 +82,9 @@
 </template>
 
 <script>
-	import flyInCart from './flyInCart.vue' 
+	import flyInCart from './verticlnav/flyInCart'
 	import numberBox from '@/components/uni-number-box/uni-number-box.vue'
+	import Counter from './verticlnav/counter'
 	export default {
 		data() {
 			return {
@@ -91,6 +94,8 @@
 				verticalNavTop: 0,
 				load: true,
 				cartBasketRect:{},
+				counter:0
+				
 			};
 		},
 		created() {
@@ -98,6 +103,7 @@
 				title: '加载中...',
 				mask: true
 			});
+			//初始化list
 			let list = [{}];
 			for (let i = 0; i < 15; i++) {
 				list[i] = {};
@@ -106,6 +112,7 @@
 			}
 			this.list = list;
 			this.listCur = list[0];
+		
 		},
 		mounted() {
 			uni.hideLoading()
@@ -162,7 +169,8 @@
 		},
 		components:{
 			flyInCart,
-			numberBox
+			numberBox,
+			Counter
 		}
 	}
 </script>
@@ -182,17 +190,15 @@
 	}
 	.myList {
 		width: 100%;
-		min-height: 150px;
+		min-height: 140px;
 		background: #FFF;
 		position: relative;
 		display: flex;
 		&_left{
 			width: 60px;
-			
 			&_img {
 				width: 100%;
 				height: 60px;
-				outline: 1px solid yellow;
 				&>image {
 					width: 100%;
 					height: 100%;
@@ -202,7 +208,6 @@
 		&_right{
 			padding-left: 4px;
 			flex: 1;
-			outline: 1px solid skyblue;
 			font-size: 12px;
 			&>view{
 				margin-bottom: 4px;
@@ -222,12 +227,19 @@
 				}
 			}
 			&_btn {
+				display: flex;
 				&_minprice {
 					letter-spacing: 1px;
 					.minprice {
 						font-size: 20px;
 						color: red;
 					}
+				}
+				&_btns{
+					flex: 1;
+					display: flex;
+					justify-content: flex-end;
+					padding-right: 5px;
 				}
 			}
 		}
@@ -251,18 +263,25 @@
 		align-content: center;
 		justify-content: center;
 	}
-	.add{
+	.add,.minus{
 		background: #E54D42;
 		color: #FFF;
 		width: 50rpx;
 		height: 50rpx;
 		border-radius: 45%;
-		position: absolute;
-		right: 0;
 		transition: all .13s;
-		line-height: 50rpx;
+		line-height: 45rpx;
 	}
-	.add:active{
+	.minus{
+		background-color: #FFF;
+		border: 1px solid #ccc;
+		color: black;
+		font-weight: bold;
+		font-size: 19px;
+		line-height: 19px;
+		text-align: center;
+	}
+	.add:active,.minus:active{
 		transform: scale(1.2);
 	}
 	.flex{
@@ -305,6 +324,22 @@
 		position: absolute;
 		bottom: 0;
 		left: 5%;
+	}
+	.counter {
+	font-size: 17px;
+    padding: 0 10px;
+    line-height: 27px;
+	}
+	.myPadding{
+		padding:12px 10px 0 10px;
+		&>view:nth-child(1){
+			border-top-left-radius: 12px;
+			border-top-right-radius: 12px;
+		}
+		&>view:nth-child(2){
+			border-bottom-left-radius: 12px;
+			border-bottom-right-radius: 12px;
+		}
 	}
 </style>
 <style>

@@ -49,7 +49,7 @@
 				  }
 						let ballX = e.touches[0].clientX - 10
 			  			let	ballY = e.touches[0].clientY - 9;
-						this.offsetX = -Math.abs(this.cartBasketRect.left - ballX + 10)
+						this.offsetX = -Math.abs(this.cartBasketRect.left - ballX +20)
 						this.offsetY = Math.abs(this.cartBasketRect.top - ballY +(this.cartBasketRect.height/1.5))
 						this.ballX = ballX
 						this.ballY = ballY
