@@ -225,6 +225,7 @@
 		}
 
 		&-select {
+			padding-left: 10px;
 			font-size: 25rpx;
 			display: flex;
 			justify-content: flex-start;

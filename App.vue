@@ -24,6 +24,9 @@ export default {
  /* background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%); */
 
 }
-
-
+</style>
+<style lang="scss">
+	/*colorUI*/
+	@import "./common/colorui/main.css";
+	@import "./common/colorui/icon.css";
 </style>

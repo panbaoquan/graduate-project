@@ -3,9 +3,12 @@ import App from './App'
 import Icon from "./components/icon/index.js"
 import {iconfontUrl,iconfontVersion} from "./config/env.js"
 import { loadStyle } from './util/util.js'
-
+import cuCustom from './common/colorui/components/cu-custom.vue'
+import request from './request/request.js'
+Vue.component('cu-custom',cuCustom)
 Vue.config.productionTip = false
 Vue.use(Icon)
+Vue.prototype.request = request
 
 
 App.mpType = 'app'
