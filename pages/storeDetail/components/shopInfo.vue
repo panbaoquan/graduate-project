@@ -11,10 +11,10 @@
 						一點點
 					</view>
 					<view class="shopInfo_content_detail">
-						配送时间
+						约45分钟
 					</view>
 					<view class="shopInfo_content_notice">
-					    公告:
+					    公告:欢迎光临，用餐高峰请提前下单，谢谢。
 					</view>
 					<view class="shopInfo_content_activity">
 					   更多活动尽请期待
@@ -41,21 +41,20 @@
 	width: 90%;
 	position: absolute;
 	left: 5%;
-	top:85px;
-	border: 1px solid skyblue;
+	top:100px;
 	&_logoImg{
 		position: absolute;
-		right: 0;
+		right: 10px;
 		&>image{
-		width: 50px;
-		height: 50px;
+		width: 60px;
+		height: 60px;
 		}
 	}
 	&_content{
 		width: 100%;
 		min-height: 100px;
 		border-radius: 8px;
-		border: 1px solid red;
+		background-color: #FFF;
 		margin-top: 25px;
 		&_main{
             margin: 10px;

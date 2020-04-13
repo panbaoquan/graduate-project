@@ -61,7 +61,12 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "test"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
@@ -81,6 +86,9 @@
                 "enable" : true
             }
         },
-        "title" : "waimai"
+        "title" : "waimai",
+        "sdkConfigs" : {
+            "maps" : {}
+        }
     }
 }

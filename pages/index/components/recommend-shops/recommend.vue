@@ -277,6 +277,7 @@
 		top:100px;
 		z-index: 100;
 		width: 100%;
+		// min-height: 202px;
 		&_content {
 			margin: 0 10px;
 		}
@@ -305,7 +306,7 @@
 		}
 	
 		&-speed {
-			font-size: 25rpx;
+			font-size: 12px;
 			&-onSpeed {
 				padding-top: 15px !important;
 			}
@@ -329,12 +330,11 @@
 		&-btn {
 			display: flex;
 			text-align: center;
-			height: 40px;
 			line-height: 40px;
 			padding-top: 15px;
-			font-size: 26rpx;
+			font-size: 14px;
 			letter-spacing: 2px;
-	
+	        
 			&-resetBtn {
 				flex: 1;
 				border-top: .5px solid #ccc;

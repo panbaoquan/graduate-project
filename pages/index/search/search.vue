@@ -30,7 +30,7 @@
 				themeClass: 'block',
 				speechEngine: 'baidu', //语音识别引擎
 				hotList: ['栏目1','栏目2','栏目3','栏目4'],	//初始化推荐列表
-				myTestData:''
+				myTestData:'',
 			}
 		},
 		onShow(){

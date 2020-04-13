@@ -8,10 +8,10 @@
 				// "backgroundColorTop":"#007AFF"
 			}
 		},
-		{
-			"path": "pages/member/member",
-			"style": {}
-		},
+		// {
+		// 	"path": "pages/member/member",
+		// 	"style": {}
+		// },
 		{
 			"path": "pages/mine/mine",
 			"style": {}
@@ -61,12 +61,12 @@
 				"iconPath": "static/images/icon-index.png",
 				"selectedIconPath": "static/images/icon-index-selected.png"
 			},
-			{
-				"pagePath": "pages/member/member",
-				"text": "会员",
-				"iconPath": "static/images/icon-member.png",
-				"selectedIconPath": "static/images/icon-member-selected.png"
-			},
+			// {
+			// 	"pagePath": "pages/member/member",
+			// 	"text": "分类",
+			// 	"iconPath": "static/images/icon-member.png",
+			// 	"selectedIconPath": "static/images/icon-member-selected.png"
+			// },
 			{
 				"pagePath": "pages/order/order",
 				"text": "订单",
