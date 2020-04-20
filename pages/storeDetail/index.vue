@@ -14,6 +14,8 @@
       <vertical-nav v-show="navIndex==0?true:false"></vertical-nav>
 	  <!--评论组件-->
 	  <Comment v-show="navIndex==1?true:false"/>
+	  <!--商家组件-->
+	  <shop-message v-show="navIndex==2?true:false"></shop-message>
     </view>
     <!--商店名片-->
     <shop-info></shop-info>
@@ -25,7 +27,8 @@ import shopInfo from "./components/shopInfo";
 import navBar from "./components/navBar.vue";
 import verticalNav from "./components/verticalnav.vue";
 import Header from "./components/header.vue";
-import Comment from "./components/comment"
+import Comment from "./components/comment";
+import shopMessage from "./components/shopMessage"
 export default {
   data() {
     return {
@@ -48,7 +51,8 @@ export default {
     navBar,
     verticalNav,
 	Header,
-	Comment
+	Comment,
+	shopMessage
   }
 };
 </script>
