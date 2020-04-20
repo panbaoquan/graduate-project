@@ -17,7 +17,7 @@
 			</scroll-view>
 			<!--右边内容-->
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375upx)"
-			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain">
+			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain" @scrolltolower="test">
 				<view class="myPadding" v-for="(item,index) in list" :key="index" :id="'main-'+index">
 					<view class="cu-bar solid-bottom bg-white">
 						<view class="action">
@@ -56,11 +56,11 @@
 							
 							<view class="myList_right_btn">
 								<view class="myList_right_btn_minprice">
-									<span class="minprice">10</span><span style="color: red;">¥</span>元 
+									<span class="minprice">{{price}}</span><span style="color: red;">¥</span>元 
 								</view>
 								<view class="myList_right_btn_btns">
 									<!-- <Counter :id="item.id" :rect="cartBasketRect"/> -->
-									<view class="minus">-</view>
+									<view class="minus" @tap="minus">-</view>
 									 <viwe class="counter">{{counter}}</viwe>
 									<view class="add flexc bold" @tap="add($event,index+1)">+</view>
 								</view>
@@ -96,7 +96,8 @@
 				load: true,
 				cartBasketRect:{},
 				counter:0,
-				Total:0
+				Total:0,
+				price:10
 				
 			};
 		},
@@ -129,9 +130,19 @@
 			//我添加的
 		},
 		methods: {
+			test(){
+				alert(123)
+			},
 			//我添加的
 			 add(e,id){
 				this.$refs.inCart.addToCart(e,id);
+				this.Total = this.price+this.Total
+			 },
+			 //减去
+			 minus(){
+				 if(this.Total){
+				   this.Total = this.Total-this.price
+				 }
 			 },
 			//我添加的
 			TabSelect(e) {
@@ -405,6 +416,7 @@
 
 	.VerticalBox {
 		display: flex;
+		padding-bottom: 50px;
 	}
 
 	.VerticalMain {

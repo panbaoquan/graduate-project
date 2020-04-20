@@ -112,6 +112,7 @@
 				});
 			}
 		},
+		//
 		watch:{
 			value:function(now,old,){
 			    if(now != old){
@@ -136,14 +137,13 @@
 		position: relative;
 		line-height: 0;
 		font-size: 0;
-		left: -3px;
 	}
 
 	.uni-rate__icon-on {
 		overflow: hidden;
 		position: absolute;
 		top: 0;
-		left:0;
+		left: 0;
 		line-height: 1;
 		text-align: left;
 	}

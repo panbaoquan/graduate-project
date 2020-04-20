@@ -3,11 +3,12 @@
       <!--商家评分栏-->
     <view class="top">
       <view class="top_left">
-        <view class="top_left_left">4.7</view>
+        <view class="top_left_left">4.8</view>
         <view class="top_left_right">
           <view class="top_left_right_title">商家评分</view>
-          <view class="top_left_right_evaluate">
-            <Rate value="4" disabled="true"/>
+          <view class="top_left_right_rate">
+            <!-- <Rate  disabled="true"/> -->
+		      	<rate-test :value="rate" size="16" margin="3" disabled="true"></rate-test>
           </view>
         </view>
       </view>
@@ -25,6 +26,7 @@
 
 <script>
 import Rate from "@/components/sx-rate/index";
+import rateTest from "@/components/uni-rate/uni-rate.vue"
 export default {
   props: {},
   data() {
@@ -33,16 +35,20 @@ export default {
             {id:1,name:"味道",rate:'4.7'},
             {id:2,name:"包装",rate:'4.8'},
             {id:3,name:"配送",rate:'4.9'},
-        ]
+        ],
+		rate:4.8
     };
   },
   computed: {},
   created() {},
   mounted() {},
-  watch: {},
+  watch: {
+	  
+  },
   methods: {},
   components: {
-    Rate
+    Rate,
+	rateTest
   }
 };
 </script>
@@ -53,7 +59,8 @@ export default {
   height: 100px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
   background-color: #FFF;
-  &_left {
+ 
+   &_left {
     width: 45%;
     display: flex;
     &_left {
@@ -66,6 +73,9 @@ export default {
       display: flex;
       flex-flow: column;
       justify-content: center;
+      &_rate {
+        padding-top: 10px;
+      }
     }
   }
   &_right {
