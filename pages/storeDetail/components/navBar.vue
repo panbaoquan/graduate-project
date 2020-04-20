@@ -43,5 +43,10 @@
 .myNav {
 	margin-top: 70px;
 	border-bottom: 1px solid #ccc;
+	.cu-item {
+		padding: 0;
+		font-size: 16px;
+		margin: 0 25px;
+	}
 }
 </style>

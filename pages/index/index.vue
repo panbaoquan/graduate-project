@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { uniSearchBar, uniSwiperDot } from '@dcloudio/uni-ui';
 import store from '../../components/store.vue';
 import topBar from '../../components/topbar/topBar.vue';
 import searchBar from '../../components/searchBar.vue';
@@ -111,8 +110,6 @@ export default {
 	},
 	watch: {},
 	components: {
-		uniSearchBar,
-		uniSwiperDot,
 		store,
 		topBar,
 		searchBar,

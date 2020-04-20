@@ -14,7 +14,7 @@
 						约45分钟
 					</view>
 					<view class="shopInfo_content_notice">
-					    公告:欢迎光临，用餐高峰请提前下单，谢谢。
+					    公告: 欢迎光临，用餐高峰请提前下单，谢谢。
 					</view>
 					<view class="shopInfo_content_activity">
 					   更多活动尽请期待
@@ -56,6 +56,10 @@
 		border-radius: 8px;
 		background-color: #FFF;
 		margin-top: 25px;
+		&_name {
+			font-weight: 600;
+			font-size: 20px;
+		}
 		&_main{
             margin: 10px;
 		}

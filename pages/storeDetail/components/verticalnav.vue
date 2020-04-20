@@ -53,6 +53,7 @@
 							<view class="myList_right_activity">
 								更多活动尽请期待
 							</view>
+							
 							<view class="myList_right_btn">
 								<view class="myList_right_btn_minprice">
 									<span class="minprice">10</span><span style="color: red;">¥</span>元 
@@ -71,16 +72,16 @@
 				</view>
 			</scroll-view>
 		</view>
-		
 		<!--购物车-->
 		<view class="cart">
 			<image id="cart" src="@/static/cart.png" mode="widthFix"></image>
+			<view class="total"><span>{{Total}}</span><span style="font-size:14px">¥元</span></view>
+	        <view class="settlement">去结算</view>
 		</view>
 		<!-- 只需要绑定购物车位置即可 -->
 		<flyInCart ref="inCart" :cartBasketRect="cartBasketRect"></flyInCart>
 	</view>
 </template>
-
 <script>
 	import flyInCart from './verticlnav/flyInCart'
 	import numberBox from '@/components/uni-number-box/uni-number-box.vue'
@@ -94,7 +95,8 @@
 				verticalNavTop: 0,
 				load: true,
 				cartBasketRect:{},
-				counter:0
+				counter:0,
+				Total:0
 				
 			};
 		},
@@ -161,7 +163,7 @@
 					if (scrollTop > this.list[i].top && scrollTop < this.list[i].bottom) {
 						this.verticalNavTop = (this.list[i].id - 1) * 50
 						this.tabCur = this.list[i].id
-						console.log(scrollTop)
+						//console.log(scrollTop)
 						return false
 					}
 				}
@@ -312,7 +314,7 @@
 	.cart{
 		width: 96%;
 		position: fixed;
-		bottom: 20px;
+		bottom: 0;
 		height: 45px;
 		background: #EE3F4D;
 		margin: auto;
@@ -340,6 +342,32 @@
 			border-bottom-left-radius: 12px;
 			border-bottom-right-radius: 12px;
 		}
+	}
+	.total {
+    position: absolute;
+    width: 100px;
+    height: 45px;
+    left: 90px;
+	font-size: 22px;
+    text-align: center;
+    line-height: 45px;
+	color: #FFF;
+	letter-spacing: 1px;
+	}
+	.settlement {
+		position: absolute;
+		width: 100px;
+    height: 45px;
+    right: 0px;
+	font-size: 18px;
+    text-align: center;
+    line-height: 45px;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	color: #436f1a;
+	letter-spacing: 1px;
+	background-color: #F8CB00;
+	
 	}
 </style>
 <style>
