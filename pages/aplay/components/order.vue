@@ -2,7 +2,7 @@
   <view class="order">
     <view class="shop">
       <view class="shop_img"></view>
-      <view class="shop_name">ewqdasd</view>
+      <view class="shop_name">商店名称</view>
     </view>
     <view class="list">
       <view class="goodsList" v-for="item in list" :key="item.id">
@@ -24,8 +24,22 @@
         <span>57</span>
       </view>
     </view>
-    <view class="other">
-        
+    <!-- <view class="other">
+        	  <view class="cu-form-group margin-top">
+	  	<view class="title">支付方式</view>
+	  	<picker @change="PickerChange" :value="index" :range="picker">
+	  		<view class="picker">
+	  			{{index>-1?picker[index]:'禁止换行，超出容器部分会以 ... 方式截断'}}
+	  		</view>
+	  	</picker>
+	  </view>
+    </view>-->
+    <view class="cart">
+      <view class="cart_total">
+        <span style="font-size:17px">待支付:</span><span> 57</span>
+        <span style="font-size:14px">¥元</span>
+      </view>
+      <view class="cart_settlement">确认支付</view>
     </view>
   </view>
 </template>
@@ -35,10 +49,16 @@ export default {
   props: {},
   data() {
     return {
+      index: 1,
       list: [
         { id: 1, name: "德和衡好-但是-送达-为-发", numbers: "1", price: "10" },
         { id: 2, name: "123", numbers: "2", price: "13" },
         { id: 3, name: "123", numbers: "1", price: "12" }
+      ],
+      other: [
+        { id: 1, name: "订单备注", content: ["点击可选择无接触配送", "xxx"] },
+        { id: 2, name: "发票信息", content: "" },
+        { id: 3, name: "号码保护" }
       ]
     };
   },
@@ -46,7 +66,11 @@ export default {
   created() {},
   mounted() {},
   watch: {},
-  methods: {},
+  methods: {
+    PickerChange(e) {
+      this.index = e.detail.value;
+    }
+  },
   components: {}
 };
 </script>
@@ -112,6 +136,40 @@ export default {
   &_price {
     width: 20%;
     text-align: right;
+  }
+}
+.cart {
+  width: 96%;
+  position: fixed;
+  bottom: 0;
+  height: 45px;
+  background: #ee3f4d;
+  margin: auto;
+  border-radius: 20px;
+  left: 2%;
+  &_total {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    left: 21px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 45px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  &_settlement {
+    position: absolute;
+    width: 100px;
+    height: 45px;
+    right: 0px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 45px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #436f1a;
+    background-color: #f8cb00;
   }
 }
 </style>
