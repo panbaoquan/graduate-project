@@ -59,7 +59,7 @@ export default {
   height: 100px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
   background-color: #FFF;
- 
+
    &_left {
     width: 45%;
     display: flex;

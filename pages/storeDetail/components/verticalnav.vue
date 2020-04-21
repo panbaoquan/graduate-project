@@ -17,7 +17,7 @@
 			</scroll-view>
 			<!--右边内容-->
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375upx)"
-			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain" @scrolltolower="test">
+			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain">
 				<view class="myPadding" v-for="(item,index) in list" :key="index" :id="'main-'+index">
 					<view class="cu-bar solid-bottom bg-white">
 						<view class="action">
@@ -76,7 +76,7 @@
 		<view class="cart">
 			<image id="cart" src="@/static/cart.png" mode="widthFix"></image>
 			<view class="total"><span>{{Total}}</span><span style="font-size:14px">¥元</span></view>
-	        <view class="settlement">去结算</view>
+	        <view class="settlement" @tap="goAplay">去结算</view>
 		</view>
 		<!-- 只需要绑定购物车位置即可 -->
 		<flyInCart ref="inCart" :cartBasketRect="cartBasketRect"></flyInCart>
@@ -130,8 +130,11 @@
 			//我添加的
 		},
 		methods: {
-			test(){
-				alert(123)
+			goAplay(){
+				let url = "/pages/aplay/index?id="+this.Total
+				uni.navigateTo({
+					url: url,
+				});
 			},
 			//我添加的
 			 add(e,id){

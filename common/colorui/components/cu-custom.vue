@@ -49,6 +49,13 @@
 				type: String,
 				default: ''
 			},
+			height:{
+				type:[String,Number],
+				default:''
+			}
+		},
+		mounted(){
+			this.CustomBar=this.height
 		},
 		methods: {
 			BackPage() {

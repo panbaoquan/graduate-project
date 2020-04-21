@@ -40,6 +40,10 @@
             "path" : "pages/storeDetail/index",
             "style" : {}
         }
+        ,{
+            "path" : "pages/aplay/index",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
