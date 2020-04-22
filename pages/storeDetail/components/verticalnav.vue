@@ -412,9 +412,10 @@
     line-height: 45px;
 	border-top-right-radius: 20px;
 	border-bottom-right-radius: 20px;
-	color: #436f1a;
+	color: #E54D42;
 	letter-spacing: 1px;
 	background-color: #F8CB00;
+	font-weight: 500;
 	
 	}
 </style>

@@ -48,6 +48,10 @@
             "path" : "pages/aplay/confirm/confirm",
             "style" : {}
         }
+        ,{
+            "path" : "pages/aplay/confirm/success",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

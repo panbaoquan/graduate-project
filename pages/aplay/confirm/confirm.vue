@@ -36,7 +36,7 @@
 			</view>
 		</view>
 	</view>
-	<view class="confirmBtn">
+	<view class="confirmBtn" @tap="confirm">
 		确认支付
 	</view>
   </view>
@@ -73,6 +73,12 @@ export default {
 			}
 		}
 		
+	  },
+	  confirm(){
+		  let url = "/pages/aplay/confirm/success"
+		  uni.navigateTo({
+			   url: url,
+		  });
 	  }
   },
   components: {
