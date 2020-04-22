@@ -7,7 +7,7 @@
     <view class="list">
       <view class="goodsList" v-for="item in list" :key="item.id">
         <view class="goodsList_name">{{item.name}}</view>
-        <view class="goodsList_numbers">× {{item.numbers}}</view>
+        <view class="goodsList_numbers">× {{item.count}}</view>
         <view class="goodsList_price">￥{{item.price}}</view>
       </view>
       <view class="list_deliveryFee">
@@ -21,7 +21,7 @@
       <view class="list_total">
         <span>小计</span>
         ￥
-        <span>57</span>
+        <span>{{total}}</span>
       </view>
     </view>
     <!-- <view class="other">
@@ -36,7 +36,8 @@
     </view>-->
     <view class="cart">
       <view class="cart_total">
-        <span style="font-size:17px">待支付:</span><span> {{total}}</span>
+        <span style="font-size:17px">待支付:</span>
+        <span>{{total}}</span>
         <span style="font-size:14px">¥元</span>
       </view>
       <view class="cart_settlement" @tap="confirm">确认支付</view>
@@ -46,16 +47,21 @@
 
 <script>
 export default {
-  props: {},
+  props: {
+    total: {
+      defalut: 0
+    },
+    list: {
+      defalut: [
+        { id: 1, name: "德和衡好-但是-送达-为-发", count: "1", price: "10" },
+        { id: 2, name: "123", count: "2", price: "13" },
+        { id: 3, name: "123", count: "1", price: "12" }
+      ]
+    }
+  },
   data() {
     return {
-      total:57,
       index: 1,
-      list: [
-        { id: 1, name: "德和衡好-但是-送达-为-发", numbers: "1", price: "10" },
-        { id: 2, name: "123", numbers: "2", price: "13" },
-        { id: 3, name: "123", numbers: "1", price: "12" }
-      ],
       other: [
         { id: 1, name: "订单备注", content: ["点击可选择无接触配送", "xxx"] },
         { id: 2, name: "发票信息", content: "" },
@@ -65,16 +71,18 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.total= parseFloat(this.total) + 7;
+  },
   watch: {},
   methods: {
     PickerChange(e) {
       this.index = e.detail.value;
     },
     confirm() {
-      let url = "/pages/aplay/confirm/confirm?total="+this.total
+      let url = "/pages/aplay/confirm/confirm?total=" + this.total;
       uni.navigateTo({
-         url: url,
+        url: url
       });
     }
   },

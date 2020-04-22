@@ -11,7 +11,7 @@
 		<!--付钱方式-->
 		<Types/>
 		<!--订单-->
-		<Order/>
+		<Order :total="total" :list="list"/>
 	</view>
 </template>
 
@@ -23,11 +23,13 @@ import Order from "./components/order.vue"
 	export default {
 		data() {
 			return {
-				
+				total:0,
+				list:[{}]
 			};
 		},
 		onLoad(option){
-			console.log(option.total)
+			this.total = option.total
+			this.list = JSON.parse(option.list)
 		},
 		components: {
 			Address,

@@ -25,7 +25,7 @@
 					</view>
 					<view class="cu-list menu-avatar">
 						<!--我添加的-->
-					  <view class="myList" v-for="(item,index) in 3" :key="index">
+					  <view class="myList" v-for="(item,index) in goods" :key="index">
 						  <view class="myList_left">
 						  	<view class="myList_left_img">
 						  		<image src="@/static/images/shops/goodsImg.jpg" mode="aspectFill"></image>
@@ -37,32 +37,32 @@
 						  </view>
 						  <view class="myList_right">
 						  	<view class="myList_right_title">
-						  		商店名称
+						  		{{item.name}}
 						  	</view>
 							<view class="myList_right_ad">
-								味道好急寥
+								{{item.ad}}
 							</view>
 							<view class="myList_right_other">
 								<view class="myList_right_other_share">
-									月售<span>100</span>份
+									月售<span>{{item.share}}</span>份
 								</view>
 								<view class="myList_right_other_evaluate">
-									好评率<span>90</span>%
+									好评率<span>{{item.evaluate}}</span>%
 								</view>
 							</view>
 							<view class="myList_right_activity">
 								更多活动尽请期待
 							</view>
-							
+							<!--加减按钮-->
 							<view class="myList_right_btn">
 								<view class="myList_right_btn_minprice">
-									<span class="minprice">{{price}}</span><span style="color: red;">¥</span>元 
+									<span class="minprice">{{item.price}}</span><span style="color: red;">¥</span>元 
 								</view>
 								<view class="myList_right_btn_btns">
 									<!-- <Counter :id="item.id" :rect="cartBasketRect"/> -->
-									<view class="minus" @tap="minus">-</view>
-									 <viwe class="counter">{{counter}}</viwe>
-									<view class="add flexc bold" @tap="add($event,index+1)">+</view>
+									<view class="minus" @tap="minus(item)">-</view>
+									 <viwe class="counter">{{item.count}}</viwe>
+									<view class="add flexc bold" @tap="add($event,index+1,item)">+</view>
 								</view>
 							</view>
 							
@@ -97,7 +97,11 @@
 				cartBasketRect:{},
 				counter:0,
 				Total:0,
-				price:10
+				goods:[
+					{id:1,name:'商品名称1',ad:'味道好急寥',share:100,evaluate:'90',price:10,count:0},
+					{id:2,name:'商品名称2',ad:'味道好急寥',share:80,evaluate:'95',price:12,count:0},
+					{id:3,name:'商品名称3',ad:'味道好急寥',share:120,evaluate:'92',price:11,count:0}
+				]
 				
 			};
 		},
@@ -131,21 +135,39 @@
 		},
 		methods: {
 			goAplay(){
-				let url = "/pages/aplay/index?id="+this.Total
+				let list = []
+				for(let i=0;i<this.goods.length;i++){
+					if(this.goods[i].count){
+						list.push(this.goods[i])
+					}
+				}
+			    list = JSON.stringify(list)
+				let url = "/pages/aplay/index?total="+this.Total+'&list='+list
 				uni.navigateTo({
 					url: url,
 				});
 			},
 			//我添加的
-			 add(e,id){
+			 add(e,id,goods){
 				this.$refs.inCart.addToCart(e,id);
-				this.Total = this.price+this.Total
+				//this.Total = price+this.Total
+				//数量增加
+				goods.count++
+				//单件货品moneny叠加
+				this.Total = this.Total + goods.price 
 			 },
 			 //减去
-			 minus(){
-				 if(this.Total){
-				   this.Total = this.Total-this.price
-				 }
+			 minus(goods){
+				//数量减少
+				if(goods.count>0){
+					//单件货品moneny累减
+					if(goods.count){
+					  this.Total = this.Total - goods.price
+					  goods.count--
+					}
+                    
+				}
+				
 			 },
 			//我添加的
 			TabSelect(e) {
