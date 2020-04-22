@@ -36,10 +36,10 @@
     </view>-->
     <view class="cart">
       <view class="cart_total">
-        <span style="font-size:17px">待支付:</span><span> 57</span>
+        <span style="font-size:17px">待支付:</span><span> {{total}}</span>
         <span style="font-size:14px">¥元</span>
       </view>
-      <view class="cart_settlement">确认支付</view>
+      <view class="cart_settlement" @tap="confirm">确认支付</view>
     </view>
   </view>
 </template>
@@ -49,6 +49,7 @@ export default {
   props: {},
   data() {
     return {
+      total:57,
       index: 1,
       list: [
         { id: 1, name: "德和衡好-但是-送达-为-发", numbers: "1", price: "10" },
@@ -69,6 +70,12 @@ export default {
   methods: {
     PickerChange(e) {
       this.index = e.detail.value;
+    },
+    confirm() {
+      let url = "/pages/aplay/confirm/confirm?total="+this.total
+      uni.navigateTo({
+         url: url,
+      });
     }
   },
   components: {}

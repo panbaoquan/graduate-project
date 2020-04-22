@@ -1,7 +1,7 @@
 <template>
   <view class="fixed">
     <cu-custom :isBack="true" bgcolor="text-white">
-      <block slot="backText">返回</block>
+      <block slot="backText"></block>
       <block slot="content"></block>
     </cu-custom>
   </view>

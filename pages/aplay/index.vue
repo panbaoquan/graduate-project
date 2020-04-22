@@ -1,7 +1,7 @@
 <template>
 	<view class="aplay">
 		<cu-custom bgColor="bg-gradual-red" :isBack="true" :height="70">
-		    <block slot="backText"><view class="goBack">返回</view></block>
+		    <block slot="backText"><view class="goBack"></view></block>
 		    <block slot="content">提交订单</block>
 		</cu-custom>
 		<!--添加收货地址-->
