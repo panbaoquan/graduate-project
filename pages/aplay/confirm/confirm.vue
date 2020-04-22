@@ -29,8 +29,8 @@
 			<view class="content_type_icon">
 			<image :src="item.imgSrc" mode="" />
 			</view>
-			<view class="content_type_title">{{item.name}}</view>
-			<view class="content_type_btn" >
+			<view class="content_type_title" :class="[item.id==1?'bottomLine':'']">{{item.name}}</view>
+			<view class="content_type_btn">
 				<view class="content_type_btn_unselected" v-show="!item.selected"></view>
 				<image v-show="item.selected" src="@/static/images/selected.png" mode="aspectFit" />
 			</view>
@@ -88,7 +88,6 @@ export default {
 .cu-bar .content {
    bottom: -70%;
 }
-
 }
 </style>
 <style lang="scss" scoped>
@@ -159,5 +158,9 @@ export default {
     left: 5%;
 	border-radius: 8px;
 	font-size: 18px;
+}
+.bottomLine {
+	border-bottom: 1px solid rgba(0,0,0,.05);
+	padding: 15px 0;
 }
 </style>

@@ -76,7 +76,7 @@
 		<view class="cart">
 			<image id="cart" src="@/static/cart.png" mode="widthFix"></image>
 			<view class="total"><span>{{Total}}</span><span style="font-size:14px">¥元</span></view>
-	        <view class="settlement" @tap="goAplay">去结算</view>
+	        <view class="settlement" @tap="goAplay" :class="[Total?'':'disabledBtn']">去结算</view>
 		</view>
 		<!-- 只需要绑定购物车位置即可 -->
 		<flyInCart ref="inCart" :cartBasketRect="cartBasketRect"></flyInCart>
@@ -98,7 +98,7 @@
 				counter:0,
 				Total:0,
 				goods:[
-					{id:1,name:'商品名称1',ad:'味道好急寥',share:100,evaluate:'90',price:10,count:0},
+					{id:1,name:'商品名称1',ad:'味道好急寥',share:100,evaluate:'90',price:10.5,count:0},
 					{id:2,name:'商品名称2',ad:'味道好急寥',share:80,evaluate:'95',price:12,count:0},
 					{id:3,name:'商品名称3',ad:'味道好急寥',share:120,evaluate:'92',price:11,count:0}
 				]
@@ -135,7 +135,8 @@
 		},
 		methods: {
 			goAplay(){
-				let list = []
+				if(this.Total) {
+                  let list = []
 				for(let i=0;i<this.goods.length;i++){
 					if(this.goods[i].count){
 						list.push(this.goods[i])
@@ -146,6 +147,8 @@
 				uni.navigateTo({
 					url: url,
 				});
+				}
+				
 			},
 			//我添加的
 			 add(e,id,goods){
@@ -209,10 +212,19 @@
 			flyInCart,
 			numberBox,
 			Counter
+		},
+		watch:{
+			Total(val){
+				this.Total = val
+			}
 		}
 	}
 </script>
 <style scoped lang="scss">
+    .disabledBtn {
+		color: #e9e8e8!important;
+		background-color: #BFBFBF!important;
+	}
 	.mySwiper {
 		height: 100px
 	}
