@@ -1,6 +1,6 @@
+<!--登录/注册 页-->
 <template>
 	<view class="register">
-		
     <cu-custom bgcolor="bg-gradual-white" :isBack="true" :height="70">
       <block slot="backText">
         <view class="goBack"></view>
@@ -42,13 +42,14 @@
 					<p>注册过的用户可凭账号密码登录</p>
 				</view>	
 			</view>
-				
+				<!--验证码---图片地址-->
+				<view class="captcha" v-show="captchaCode?true:false">{{captchaCode}}</view>
+			
 			<wButton 
 				text="登 录 / 注 册"
 				:rotate="isRotate" 
 				@click.native="startReg()"
 			></wButton>
-			
 			<!-- 底部信息 -->
 			<view class="footer">
 				<text 
@@ -78,6 +79,7 @@
 				verCode:"", //验证码
 				showAgree:true, //协议是否选择
 				isRotate: false, //是否加载旋转
+				captchaCode:''
 			}
 		},
 		components:{
@@ -86,12 +88,29 @@
 		},
 		mounted() {
 			_this= this;
+			
 		},
 		methods: {
+			//获取验证码 本地随机数模拟
+			getcaptcha(){
+				this.captchaCode = ''
+				for(let i=0;i<4;i++){
+					this.captchaCode = this.captchaCode + Math.floor(Math.random()*10)
+				}
+				uni.showToast({
+				        icon: 'none',
+						position: 'bottom',
+						title: this.captchaCode,
+						duration:5000
+				});
+				this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
+			},
+			//是否选择协议
 			isShowAgree(){
 				//是否选择协议
 				_this.showAgree = !_this.showAgree;
 			},
+			//获取验证码
 			getVerCode(){
 				//获取验证码
 				if (_this.phoneData.length != 11) {
@@ -102,29 +121,36 @@
 				    });
 				    return false;
 				}
-				console.log("获取验证码")
-				this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
-				uni.showToast({
-				    icon: 'none',
-					position: 'bottom',
-				    title: '模拟倒计时触发'
-				});
+			
+				// uni.showToast({
+				//     icon: 'none',
+				// 	position: 'bottom',
+				//     title: '模拟倒计时触发'
+				// });
 				
-				setTimeout(function(){
-					_this.$refs.runCode.$emit('runCode',0); //假装模拟下需要 终止倒计时
-					uni.showToast({
-					    icon: 'none',
-						position: 'bottom',
-					    title: '模拟倒计时终止'
-					});
-				},3000)
+				// setTimeout(function(){
+				// 	_this.$refs.runCode.$emit('runCode',0); //假装模拟下需要 终止倒计时
+				// 	uni.showToast({
+				// 	    icon: 'none',
+				// 		position: 'bottom',
+				// 	    title: '模拟倒计时终止'
+				// 	});
+				// },3000)
+				//获取验证码
+				
+				//请求后台地址
+				// 1.获取验证码
+				this.getcaptcha()
+				
+				
 			},
 		    startReg() {
-				//注册
+				//登录/注册按钮
 				if(this.isRotate){
 					//判断是否加载中，避免重复点击请求
 					return false;
 				}
+				//前台判断格式
 				if (this.showAgree == false) {
 				    uni.showToast({
 				        icon: 'none',
@@ -149,7 +175,7 @@
 		            });
 		            return false;
 		        }
-				if (this.verCode.length != 4) {
+				if (this.verCode.length != 4 ||this.verCode!=this.captchaCode) {
 				    uni.showToast({
 				        icon: 'none',
 						position: 'bottom',
@@ -157,11 +183,51 @@
 				    });
 				    return false;
 				}
-				console.log("注册成功")
-				_this.isRotate=true
-				setTimeout(function(){
-					_this.isRotate=false
-				},3000)
+				//console.log("登录/注册成功")
+				
+				// setTimeout(function(){
+				// 	_this.isRotate=false
+				// },3000)
+				
+				//开始登录
+				 _this.isRotate=true
+				uni.request({
+					url: 'http://47.100.185.82:38080/app/mock/17/login', //仅为示例，并非真实接口地址。
+					method:'POST',
+					data: {
+						captcha_code: "8034",
+                        password: "123456",
+                        userName: "18262976292"
+					},
+					success: (res) => {
+						_this.isRotate=false
+						//模拟后台 账户密码验证
+						if(res.data.data.userName==this.phoneData && res.data.data.password==this.passData){
+                            console.log('跳转')                           
+						}else if(res.data.data.userName!=this.phoneData){
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '手机号错误'
+							 });
+							return false
+						}else if(res.data.data.password!=this.passData){
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '密码错误'
+							 });
+							 return false
+						}else if(this.captchaCode!=this.verCode) {
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '验证码错误'
+							 });
+							 return false
+						}
+					}
+				});
 		    }
 		}
 	}
@@ -188,5 +254,10 @@
 		margin-bottom: 10px;
 		color: red;
 		font-size: 12px;
+	}
+	.captcha{
+	   position: absolute;
+	   top: 52.5%;
+	   left: 60%;
 	}
 </style>

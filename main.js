@@ -6,13 +6,14 @@ import {iconfontUrl,iconfontVersion} from "./config/env.js"
 import { loadStyle } from './util/util.js'
 import cuCustom from './common/colorui/components/cu-custom.vue'
 import request from './request/request.js'
+import store from './store'
 Vue.component('cu-custom',cuCustom)
 Vue.component('Icon',Icon)
 Vue.config.productionTip = false
 // Vue.use(Icon)
 
 Vue.prototype.request = request
-
+Vue.prototype.$store = store 
 
 App.mpType = 'app'
 // iconfontVersion.forEach(ele => {
