@@ -1,8 +1,11 @@
 <template>
   <view class="avatar">
     <view class="avatar-left" @click="toPerson">
-      <view><Icon icon="icon-touxiang" size="30"></Icon></view>
-      <text>用户0291020192</text>
+      <view>
+        <Icon icon="icon-touxiang" size="30"></Icon>
+      </view>
+      <text v-if="isLogin">用户0291020192</text>
+      <text v-if="!isLogin">登录/注册</text>
     </view>
     <view class="avatar-right">
       <!-- <Icon icon="icon-shezhi" size="20"></Icon> -->
@@ -15,11 +18,18 @@
 import Icon from "../../../components/icon/index.vue";
 export default {
   data() {
-    return {};
+    return {
+      isLogin: false
+    };
   },
   methods: {
     toPerson() {
-      uni.navigateTo({ url: "/pages/mine/personal-information/index" });
+      //this.isLogin = !this.isLogin;
+      if (this.isLogin) {
+        uni.navigateTo({ url: "/pages/mine/personal-information/index" });
+      }else {
+        uni.navigateTo({ url: "/pages/mine/login/index" });
+      }
     }
   },
   components: {
