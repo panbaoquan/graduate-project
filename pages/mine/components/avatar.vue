@@ -2,8 +2,8 @@
   <view class="avatar">
     <view class="avatar-left" @click="toPerson">
       <view>
-        <Icon icon="icon-touxiang" size="30" v-if="imgSrc==''?true:false"></Icon>
-        <image :src="imgSrc" mode="aspectFit"  />
+        <Icon icon="icon-touxiang" size="30" v-if="!this.$store.state.isLogin"></Icon>
+        <image :src="imgSrc" mode="aspectFit" v-if="this.$store.state.isLogin" />
       </view>
       <text v-if="this.$store.state.isLogin">{{userName}}</text>
       <text v-if="!this.$store.state.isLogin">登录/注册</text>
@@ -51,6 +51,7 @@ export default {
      console.log(this.userName)
   },
   watch: {
+    
   }
 };
 </script>

@@ -21,9 +21,9 @@ import topBar from "../../components/topbar/topBar.vue";
 export default {
   data() {
     return {
-      isLogin: false,
+      isLogin: this.$store.state.isLogin,
       imgSrc: "",
-      userName:'',
+      userName: "",
       listData: [
         { id: 1, name: "我的地址", icon: "icon-dingwei" },
         { id: 2, name: "我的足迹", icon: "icon-zuji" },
@@ -72,7 +72,7 @@ export default {
           //全局传值Id
           this.$store.state.user_id = result.user_id;
           //获取username
-          this.userName = result.username
+          this.userName = result.username;
         }
       } catch (e) {
         // error
@@ -81,11 +81,12 @@ export default {
     }
   },
   watch: {
-    //登录成功,就立刻替换mine头像
+    //登录成功,替换mine头像
     "$store.state.isLogin": function(val, oldVal) {
       if (val == true) {
         this.getImgsrc();
       }
+      this.$store.state.isLogin = val
     }
   }
 };

@@ -54,13 +54,12 @@ export default {
             });
           }
         });
-      }else if(name=='用户名'){
+      }else if(name==='用户名'){
           //修改用户名
       }else if(name==='登录密码') {
          //重置密码
           uni.navigateTo({
            url: '/pages/mine/personal-information/modifyPassword/modifyPassword' 
-
         });
       }
     }

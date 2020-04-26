@@ -68,10 +68,12 @@
 			};
 		},
 		methods:{
+			//隐藏模态框
 			hideModal(e) {
 				this.modalName = null
 			},
-         changePwd(){
+			//重置密码
+            changePwd(){
 		
 			 if (this.phoneNumber.length !=11) {
 				    uni.showToast({
@@ -105,18 +107,12 @@
 					 }else {
 					 this.message = res.data.message
 					 }
-					 console.log(this.message)
 					 this.modalName = 'Modal'
 				 }
 			 });
 		 }
 		},
-		watch:{
-			message(val){
-				this.message = val
-				console.log(val)
-			}
-		}
+		watch:{}
 	}
 </script>
 <style lang="scss">
