@@ -2,22 +2,29 @@
   <view>
     <view class="status_bar"></view>
     <view class="title">订单</view>
-    <view class="content">
-      <view class="avator">
-        <Icon icon="icon-touxiang1" size="184" />
-      </view>
-      <view class="tip">您还没有登录,请登录后查看订单</view>
-      <view class="btn">
-        <view class="btn_login">登录/注册</view>
-      </view>
+    <view class="content"  v-show="!this.$store.state.isLogin">
+        <view class="avator">
+          <Icon icon="icon-touxiang1" size="184" />
+        </view>
+        <view class="tip">您还没有登录,请登录后查看订单</view>
+        <view class="btn">
+          <view class="btn_login" @tap="login">登录/注册</view>
+        </view>
     </view>
+     <view v-show="this.$store.state.isLogin">登录成功</view>
   </view>
 </template>
-
 <script>
 export default {
   data() {
     return {};
+  },
+  methods: {
+    login() {
+      uni.navigateTo({
+        url: "/pages/mine/login/index"
+      });
+    }
   },
   components: {}
 };
@@ -41,17 +48,16 @@ export default {
     padding: 15px 0;
   }
   .btn {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
     &_login {
-	  width: 100px;
-	  background-color: #D43A32;
+      width: 100px;
+      background-color: #d43a32;
       height: 30px;
       text-align: center;
-	  line-height: 30px;
-	  color: #FFF;
+      line-height: 30px;
+      color: #fff;
     }
+  }
 }
-}
-
 </style>

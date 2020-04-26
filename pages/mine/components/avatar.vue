@@ -2,10 +2,11 @@
   <view class="avatar">
     <view class="avatar-left" @click="toPerson">
       <view>
-        <Icon icon="icon-touxiang" size="30"></Icon>
+        <Icon icon="icon-touxiang" size="30" v-if="imgSrc==''?true:false"></Icon>
+        <image :src="imgSrc" mode="aspectFit"  />
       </view>
-      <text v-if="isLogin">用户0291020192</text>
-      <text v-if="!isLogin">登录/注册</text>
+      <text v-if="this.$store.state.isLogin">{{userName}}</text>
+      <text v-if="!this.$store.state.isLogin">登录/注册</text>
     </view>
     <view class="avatar-right">
       <!-- <Icon icon="icon-shezhi" size="20"></Icon> -->
@@ -17,23 +18,39 @@
 <script>
 import Icon from "../../../components/icon/index.vue";
 export default {
+  props:{
+    imgSrc:{
+      default:''
+    },
+    userName:{
+     default:'用户0291020192'
+    }
+  },
   data() {
     return {
-      isLogin: false
     };
   },
   methods: {
+    //进入个人中心页面
     toPerson() {
-      //this.isLogin = !this.isLogin;
-      if (this.isLogin) {
-        uni.navigateTo({ url: "/pages/mine/personal-information/index" });
-      }else {
+      //是否登录成功,判断进入个人中心页面
+      if (this.$store.state.isLogin) {
+        //页面跳转传参
+        uni.navigateTo({ 
+          url: "/pages/mine/personal-information/index?imgSrc="+this.imgSrc+'&userName='+this.userName
+        });
+      } else {
         uni.navigateTo({ url: "/pages/mine/login/index" });
       }
     }
   },
   components: {
     Icon
+  },
+  mounted() {
+     console.log(this.userName)
+  },
+  watch: {
   }
 };
 </script>
@@ -56,6 +73,11 @@ export default {
       margin: 0 10rpx;
       border-radius: 50%;
       background-color: rgb(219, 215, 215);
+      & > image {
+        width: 90rpx;
+        height: 90rpx;
+        border-radius: 50%;
+      }
     }
   }
 

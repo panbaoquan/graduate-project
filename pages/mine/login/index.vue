@@ -141,11 +141,9 @@
 				//请求后台地址
 				// 1.获取验证码
 				this.getcaptcha()
-				
-				
 			},
 		    startReg() {
-				//登录/注册按钮
+				// //登录/注册按钮
 				if(this.isRotate){
 					//判断是否加载中，避免重复点击请求
 					return false;
@@ -183,52 +181,86 @@
 				    });
 				    return false;
 				}
-				//console.log("登录/注册成功")
+				console.log("登录/注册成功")
 				
-				// setTimeout(function(){
-				// 	_this.isRotate=false
-				// },3000)
+				setTimeout(function(){
+					_this.isRotate=false
+				},3000)
 				
 				//开始登录
-				 _this.isRotate=true
+
+				_this.isRotate=true
 				uni.request({
-					url: 'http://47.100.185.82:38080/app/mock/17/login', //仅为示例，并非真实接口地址。
-					method:'POST',
-					data: {
-						captcha_code: "8034",
-                        password: "123456",
-                        userName: "18262976292"
+				  //url: 'http://localhost:8001/v2/login',
+				   url:this.$store.state.baseUrl+'/v2/login',
+				   method:'POST',
+				   data: {
+						username: this.phoneData,
+						password: this.passData,
+						captcha_code: this.verCode
 					},
 					success: (res) => {
 						_this.isRotate=false
-						//模拟后台 账户密码验证
-						if(res.data.data.userName==this.phoneData && res.data.data.password==this.passData){
-                            console.log('跳转')                           
-						}else if(res.data.data.userName!=this.phoneData){
+						if(res.data.message) {
 							uni.showToast({
 				            icon: 'none',
-					        position: 'bottom',
-				             title: '手机号错误'
+					         position: 'bottom',
+				             title: res.data.message
 							 });
-							return false
-						}else if(res.data.data.password!=this.passData){
-							uni.showToast({
-				            icon: 'none',
-					        position: 'bottom',
-				             title: '密码错误'
-							 });
-							 return false
-						}else if(this.captchaCode!=this.verCode) {
+						}else if(this.captchaCode!=this.verCode) {//模拟后台 验证码
 							uni.showToast({
 				            icon: 'none',
 					        position: 'bottom',
 				             title: '验证码错误'
 							 });
 							 return false
+						}else {
+							//登录成功
+							//开启登录功能
+							this.$store.state.isLogin = true
+							uni.switchTab({
+							 url: '/pages/mine/mine'
+							});
+							//同步存储
+							uni.setStorageSync('usrInfo', JSON.stringify(res.data))
 						}
+						// if(res.data.data.userName==this.phoneData && res.data.data.password==this.passData){
+						//    this.$store.state.isLogin = true
+						//    uni.showToast({
+				        //     icon: 'none',
+					    //     position: 'bottom',
+				        //      title: '登录成功'
+						// 	 });
+						// uni.switchTab({
+						// 	 url: '/pages/mine/mine'
+						// });
+						// }else if(res.data.data.userName!=this.phoneData){
+						// 	uni.showToast({
+				        //     icon: 'none',
+					    //     position: 'bottom',
+				        //      title: '手机号错误'
+						// 	 });
+						// 	return false
+						// }else if(res.data.data.password!=this.passData){
+						// 	uni.showToast({
+				        //     icon: 'none',
+					    //     position: 'bottom',
+				        //      title: '密码错误'
+						// 	 });
+						// 	 return false	 
+						// }else if(this.captchaCode!=this.verCode) {//模拟后台 验证码
+						// 	uni.showToast({
+				        //     icon: 'none',
+					    //     position: 'bottom',
+				        //      title: '验证码错误'
+						// 	 });
+						// 	 return false
+						// }
 					}
 				});
-		    }
+				
+			}
+
 		}
 	}
 </script>

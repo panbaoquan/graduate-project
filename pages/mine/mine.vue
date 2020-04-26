@@ -4,7 +4,7 @@
       <!-- 这里是状态栏 -->
     </view>
     <!-- 顶部 -->
-    <Avatar></Avatar>
+    <Avatar :isLogin="isLogin" :imgSrc="imgSrc" :userName="userName"></Avatar>
     <!-- 我的功能 -->
     <Block :list="listData" title="我的功能" />
     <!-- <MyFunction /> -->
@@ -17,10 +17,13 @@
 import Icon from "../../components/icon/index.vue";
 import Avatar from "./components/avatar.vue";
 import Block from "./components/block";
-import topBar from "../../components/topbar/topBar.vue"
+import topBar from "../../components/topbar/topBar.vue";
 export default {
   data() {
     return {
+      isLogin: false,
+      imgSrc: "",
+      userName:'',
       listData: [
         { id: 1, name: "我的地址", icon: "icon-dingwei" },
         { id: 2, name: "我的足迹", icon: "icon-zuji" },
@@ -46,11 +49,44 @@ export default {
       ]
     };
   },
+  onLoad() {
+    if (this.$store.state.isLogin) {
+      this.getImgsrc();
+    }
+  },
   components: {
     Icon,
     Avatar,
     Block,
-	topBar
+    topBar
+  },
+  methods: {
+    getImgsrc() {
+      //同步获取
+      try {
+        const value = uni.getStorageSync("usrInfo");
+        if (value) {
+          let result = JSON.parse(value);
+          //获取头像图片
+          this.imgSrc = this.$store.state.baseUrl + "/img/" + result.avatar;
+          //全局传值Id
+          this.$store.state.user_id = result.user_id;
+          //获取username
+          this.userName = result.username
+        }
+      } catch (e) {
+        // error
+        console.log(e);
+      }
+    }
+  },
+  watch: {
+    //登录成功,就立刻替换mine头像
+    "$store.state.isLogin": function(val, oldVal) {
+      if (val == true) {
+        this.getImgsrc();
+      }
+    }
   }
 };
 </script>
@@ -63,7 +99,7 @@ page {
   height: var(--status-bar-height);
   width: 100%;
   //background-image: linear-gradient(-135deg, #ffbd27 0%, #ffd161 100%);
-  background-color:  #f7f7f7;
+  background-color: #f7f7f7;
 }
 .my {
   background-color: #f7f7f7;
