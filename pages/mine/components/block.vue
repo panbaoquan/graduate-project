@@ -10,7 +10,7 @@
   <view class="func">
     <view class="func-title">{{ title }}</view>
     <view class="func-content">
-      <view v-for="(item, index) in list" :key="index">
+      <view v-for="(item, index) in list" :key="index" @tap="click(item.name)">
         <view>
           <Icon :icon="item.icon" :color="'#ee3f4d'" :size="item.size" />
         </view>
@@ -33,7 +33,24 @@ export default {
   computed: {},
   created() {},
   watch: {},
-  methods: {},
+  methods: {
+    click(name) {
+      if(this.$store.state.isLogin){
+            if(name=='我的地址'){
+        uni.navigateTo({
+           url: '/pages/mine/address/address'
+        })
+        }
+      } else {
+        uni.showToast({
+          title: '您尚未登录,请先登录后再操作',
+          icon:'none',
+          duration: 2000
+        });
+      }
+     
+    }
+  },
   components: { Icon }
 };
 </script>

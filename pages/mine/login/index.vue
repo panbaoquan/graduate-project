@@ -43,8 +43,7 @@
 				</view>	
 			</view>
 				<!--验证码---图片地址-->
-				<view class="captcha" v-show="captchaCode?true:false">{{captchaCode}}</view>
-			
+				<!-- <view class="captcha" v-show="captchaCode?true:false">{{captchaCode}}</view> -->
 			<wButton 
 				text="登 录 / 注 册"
 				:rotate="isRotate" 
@@ -99,7 +98,7 @@
 				}
 				uni.showToast({
 				        icon: 'none',
-						position: 'bottom',
+						position: 'center',
 						title: this.captchaCode,
 						duration:5000
 				});
@@ -143,7 +142,7 @@
 				this.getcaptcha()
 			},
 		    startReg() {
-				// //登录/注册按钮
+				//登录/注册按钮
 				if(this.isRotate){
 					//判断是否加载中，避免重复点击请求
 					return false;
@@ -181,8 +180,6 @@
 				    });
 				    return false;
 				}
-				console.log("登录/注册成功")
-				
 				setTimeout(function(){
 					_this.isRotate=false
 				},3000)
@@ -191,7 +188,6 @@
 
 				_this.isRotate=true
 				uni.request({
-				  //url: 'http://localhost:8001/v2/login',
 				   url:this.$store.state.baseUrl+'/v2/login',
 				   method:'POST',
 				   data: {

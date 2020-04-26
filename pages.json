@@ -64,6 +64,18 @@
             "path" : "pages/mine/personal-information/modifyPassword/modifyPassword",
             "style" : {}
         }
+        ,{
+            "path" : "pages/mine/address/address",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/address/add/add",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/address/location/location",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
