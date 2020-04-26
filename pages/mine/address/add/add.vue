@@ -71,12 +71,6 @@
 			},
 			//新增地址
 		addAddress(){
-			console.log(this.name)
-			console.log(this.address_detail)
-			console.log(this.geohash)
-			console.log(this.address)
-			console.log(this.phoneNum)
-			console.log(this.$store.state.user_id)
 			uni.request({
 				url: this.$store.state.baseUrl+"/v1/users/"+this.$store.state.user_id+"/addresses", //仅为示例，并非真实接口地址。
 				method:'POST',
@@ -94,8 +88,13 @@
                     tag_type: 4
 				},
 				success: (res) => {
-					console.log(res.data);
-					
+					if(res.data.status==0){
+						uni.showToast({
+						title: res.data.message,
+						duration: 2000,
+						icon:'none'
+					});
+					}
 				}
 			});
 		},
