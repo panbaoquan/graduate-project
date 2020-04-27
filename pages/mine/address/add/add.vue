@@ -72,7 +72,7 @@
 			//新增地址
 		addAddress(){
 			uni.request({
-				url: this.$store.state.baseUrl+"/v1/users/"+this.$store.state.user_id+"/addresses", //仅为示例，并非真实接口地址。
+				url: this.$store.state.baseUrl+"/v1/users/"+this.$store.state.user_id+"/addresses", 
 				method:'POST',
 				data: {
 					name:this.name,
@@ -91,9 +91,13 @@
 					if(res.data.status==0){
 						uni.showToast({
 						title: res.data.message,
-						duration: 2000,
+						duration: 3500,
 						icon:'none'
 					});
+					}else if(res.data.status==1){
+						uni.navigateTo({
+							 url: '/pages/mine/address/address',
+						});
 					}
 				}
 			});
