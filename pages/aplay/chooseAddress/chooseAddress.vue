@@ -59,6 +59,10 @@ export default {
   onLoad(){
 	  this.getAddresses()
   },
+  onReady(){
+	  this.getAddresses()
+
+  },
   methods: {
     //
     RadioChange(e) {
@@ -93,6 +97,11 @@ export default {
 			 url: '/pages/aplay/addNewAddress/addNewAddress'
 		});
 	}
+  },
+  watch:{
+	  list(val){
+		  this.list = val
+	  }
   }
 };
 </script>
