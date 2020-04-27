@@ -134,6 +134,7 @@
 			//我添加的
 		},
 		methods: {
+			//去支付
 			goAplay(){
 				if(this.Total) {
                   let list = []
@@ -142,10 +143,13 @@
 						list.push(this.goods[i])
 					}
 				}
-			    list = JSON.stringify(list)
-				let url = "/pages/aplay/index?total="+this.Total+'&list='+list
+				list = JSON.stringify(list)
+				//存取list 到localStorage
+				uni.setStorageSync('list', list)
+				//存取total 到localStorag
+				uni.setStorageSync('total', this.Total)
 				uni.navigateTo({
-					url: url,
+					url: '/pages/aplay/index',
 				});
 				}
 				

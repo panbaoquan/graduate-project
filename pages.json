@@ -76,6 +76,14 @@
             "path" : "pages/mine/address/location/location",
             "style" : {}
         }
+        ,{
+            "path" : "pages/aplay/chooseAddress/chooseAddress",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/aplay/addNewAddress/addNewAddress",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

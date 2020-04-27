@@ -5,7 +5,7 @@
 		    <block slot="content">提交订单</block>
 		</cu-custom>
 		<!--添加收货地址-->
-		<Address/>
+		<Address :address="address"/>
 		<!--送达时间-->
 		<Arrival/>
 		<!--付钱方式-->
@@ -24,12 +24,14 @@ import Order from "./components/order.vue"
 		data() {
 			return {
 				total:0,
-				list:[{}]
+				list:[{}],
+				address:''
 			};
 		},
 		onLoad(option){
-			this.total = option.total
-			this.list = JSON.parse(option.list)
+			this.total = uni.getStorageSync('total')
+			this.list = JSON.parse(uni.getStorageSync('list'))
+			this.address = JSON.parse(option.address)
 		},
 		components: {
 			Address,
