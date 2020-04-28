@@ -15,6 +15,7 @@
 				<!--店铺-->
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
 					<view :class="{ stores_seat: isTop }"></view>
+				    <view  v-if="isNone==0" style="text-align:center">暂无此类店铺</view>
 					<!--单独商店-->
 					<store v-for="(item, index) in recommendList" :index="index" :key="index" page="index" :shop="item"></store>
 				</scroll-view>
@@ -124,7 +125,11 @@ export default {
 			});
 		}
 	},
-	watch: {},
+	watch: {
+		recommendList(val){
+			this.isNone = this.recommendList.length
+		}
+	},
 	components: {
 		store,
 		topBar,

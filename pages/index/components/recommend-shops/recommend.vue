@@ -268,6 +268,10 @@
 					url:'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_ids[]='+id,
 					success: (res) => {
 						this.$emit('category',res.data)
+						//箭头向下
+				        this.flags[1].flagValue = true
+				        //关闭下拉面板
+				        this.flags[1].flag_dropdown_list = false
 					}
 				});
 			}
