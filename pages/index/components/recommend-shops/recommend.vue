@@ -201,16 +201,40 @@
 			//改变综合排序出的值
 			changeRankContent(index) {
 				for (let i = 0; i < this.flags[0].rankContent.length; i++) {
-					if (this.flags[0].rankContent[i].id === index) {
+					if (this.flags[0].rankContent[i].id == index) {
 						//更换排名内容
 						this.flags[0].name = this.flags[0].rankContent[i].name
 						//排名面板消失
 						this.flags[0].flag_dropdown_list = false
 						//改变箭头方向,向下
 						this.flags[0].flagValue = true
+						this.getRankList(this.flags[0].name)
+						
 					}
 				}
 			
+			},
+			//根据综合排序列出内容
+			getRankList(name){
+				let order_by = 4
+				if(name=="评分优先"){
+					order_by = 3
+				}else if(name=='销量优先') {
+					order_by = 6
+				}else if(name=='距离优先') {
+					order_by = 5
+				}else {
+					order_by = 4
+				}
+				uni.request({
+					url: 'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762', //仅为示例，并非真实接口地址。
+					data: {
+						order_by:order_by
+					},
+					success: (res) => {
+						this.$emit('rank',res.data)
+					}
+				});
 			},
 			//改变背景颜色
 			changeBackgroundColor(index, group) {

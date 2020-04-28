@@ -11,7 +11,7 @@
 				<!-- 分类 -->
 				<category-bar></category-bar>
 				<!--推荐商家悬浮与固定-->
-				<Recommend :isTop="isTop" @category="getCategory"/>
+				<Recommend :isTop="isTop" @category="getCategory" @rank="getRank"/>
 				<!--店铺-->
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
 					<view :class="{ stores_seat: isTop }"></view>
@@ -107,7 +107,12 @@ export default {
 		}
 	},
 	methods: {
+		//根据商家分类筛选
 		getCategory(val){
+			this.recommendList = val
+		},
+		//排名筛选
+		getRank(val){
 			this.recommendList = val
 		},
 		scroll: function(e) {
