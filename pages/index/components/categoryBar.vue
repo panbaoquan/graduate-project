@@ -1,9 +1,9 @@
 <template>
 	<view class="block">
 		<view class="block-section" v-for="(item,index) in menus" :key="index" @tap="switchPage(index)">
-			<image :src="item.iconPath" mode=""></image>
+			<image :src="'https://fuss10.elemecdn.com'+item.image_url" mode=""></image>
 			<view>
-				<text class="classify-item-title">{{item.name}}</text>
+				<text class="classify-item-title">{{item.title}}</text>
 			</view>
 		</view>
 	</view>
@@ -57,6 +57,9 @@
 				]
 			}
 		},
+		mounted(){
+			this.getCategory()
+		},
 		methods:{
 			//分类，切换分页
 			switchPage(index) {
@@ -69,6 +72,16 @@
 						break;
 				}
 			},
+			//分类列表
+			getCategory(){
+				uni.request({
+					url: this.$store.state.baseUrl+'/v2/index_entry', //仅为示例，并非真实接口地址。
+					success: (res) => {
+						this.menus = res.data
+						// console.log(res.data);
+					}
+				});
+			}
 		}
 	}
 </script>

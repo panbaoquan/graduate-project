@@ -122,7 +122,6 @@
 						uni.navigateTo({
 							 url: '/pages/aplay/chooseAddress/chooseAddress',
 						});
-						
 					}
 				}
 			});

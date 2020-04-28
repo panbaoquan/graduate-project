@@ -22,13 +22,19 @@
 			</view>
 			<!--品类-下拉模块-->
 			<view class="group-select-kind" v-show="flags[1].flag_dropdown_list">
-				尽情期待
 				<view class="group-select-kind-leftList">
-	
+                   <view class="group-select-kind-leftList-item" 
+				   @tap="choosedIndex=index" v-for="(item,index) in category" :key="index">
+				   {{item.name}}
+				   <text v-show="choosedIndex==index" class="text-gray cuIcon-right"></text>
+				   </view>
 				</view>
-	
-				<view class="group-select-kind-rightContent">
-	
+				<view class="group-select-kind-rightList">
+                      <view class="group-select-kind-rightList-item"
+					   v-for="(item,index) in category[choosedIndex].sub_categories" :key="index" 
+					   @tap="choosedCategory(category[choosedIndex].sub_categories[index].id)"
+					   v-show="index!=0"
+					  >{{item.name}}</view>
 				</view>
 			</view>
 			<!--速度-下拉面板-->
@@ -72,6 +78,7 @@
 		},
 		data() {
 			return {
+				choosedIndex:1,
 				count:0,
 				flags: [{
 						name: '综合排序',
@@ -155,7 +162,11 @@
 						flag_dropdown_list: false,
 					}
 				],
+				category:[]
 			};
+		},
+		mounted(){
+			this.getAllCategory()
 		},
 		methods:{
 			currentScroll() {
@@ -242,6 +253,24 @@
 				//关闭下拉面板
 				this.flags[2].flag_dropdown_list = false
 			},
+			//获取所有品类数据
+			getAllCategory(){
+				uni.request({
+					url: 'https://elm.cangdu.org/shopping/v2/restaurant/category',
+					success: (res) => {
+						this.category = res.data
+					}
+				});
+			},
+			//根据类别 获取所有商品
+			choosedCategory(id){
+                uni.request({
+					url:'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_ids[]='+id,
+					success: (res) => {
+						this.$emit('category',res.data)
+					}
+				});
+			}
 		},
 		// watch:{
 		// 	isTop:(old,new)=>{
@@ -255,6 +284,8 @@
 	.nearStone {
 		width: 100%;
 		&_title {
+			font-size: 20px;
+			font-weight: 600;
 			padding: 20px 0 20px 13px;
 			&_offset {
 				padding-left: 18px;
@@ -353,6 +384,24 @@
 		}
 		&-kind {
 			margin: 0 13px;
+			display: flex;
+			&-leftList {
+				flex: 1;
+				&-item {
+                    height: 30px;
+					line-height: 30px;
+					border-bottom: 1px solid rgba(0,0,0,0.1);
+					
+				 }
+			}
+			&-rightList {
+				flex: 1;
+				&-item {
+                    height: 30px;
+					line-height: 30px;
+					border-bottom: 1px solid rgba(0,0,0,0.1);
+				 }
+			}
 		}
 	}
 </style>

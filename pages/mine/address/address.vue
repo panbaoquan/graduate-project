@@ -20,11 +20,11 @@
         >
           <!-- <view class="cu-avatar round lg" :style="[{backgroundImage:'url(https://ossweb-img.qq.com/images/lol/web201310/skin/big2100'+ (index+2) +'.jpg)'}]"></view> -->
           <view class="content">
-            <view class="text-grey">
-              <text class="cuIcon-locationfill text-red margin-right-xs"></text>
-              {{item.address}}{{item.address_detail}}
+            <view class="">
+              <text class="cuIcon-locationfill text-red margin-right-xs text-lg"></text>
+             <text class="text-lg">{{item.address}}{{item.address_detail}}</text> 
             </view>
-            <view class="text-gray text-sm">
+            <view class="text-sm">
               <text class="cuIcon-profile text-red margin-right-xs"></text>
               {{item.name}}
               <text class="cuIcon-mobile text-red margin-right-xs"></text>

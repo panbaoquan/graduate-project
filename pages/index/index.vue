@@ -11,12 +11,12 @@
 				<!-- 分类 -->
 				<category-bar></category-bar>
 				<!--推荐商家悬浮与固定-->
-				<Recommend :isTop="isTop" />
+				<Recommend :isTop="isTop" @category="getCategory"/>
 				<!--店铺-->
 				<scroll-view class="stores" scroll-y="true" show-scrollbar="true">
 					<view :class="{ stores_seat: isTop }"></view>
 					<!--单独商店-->
-					<store v-for="(item, index) in 15" :index="index" :key="index" page="index" :shop="shop"></store>
+					<store v-for="(item, index) in recommendList" :index="index" :key="index" page="index" :shop="item"></store>
 				</scroll-view>
 			</view>
 		</scroll-view>
@@ -49,11 +49,14 @@ export default {
 				name: '肯德基宅急送',
 				logoSrc: '/static/images/storesLogo/KFC-logo.jpg'
 			},
-			baseUrl :'https://elm.cangdu.org'
+			baseUrl :'https://elm.cangdu.org',
+			recommendList:[]
 		};
 	},
 	//页面生命周期函数
-	onLoad() {},
+	onLoad() {
+		this.getRecommendStores()
+	},
 	onShow() {
 		uni.getLocation({
 			// type: 'wgs84',
@@ -103,9 +106,22 @@ export default {
 		}
 	},
 	methods: {
+		getCategory(val){
+			this.recommendList = val
+		},
 		scroll: function(e) {
 			console.log(e);
 			// this.old.scrollTop = e.detail.scrollTop
+		},
+		//获取推荐商家
+        getRecommendStores(){
+			uni.request({
+				url:'https://elm.cangdu.org/shopping/restaurants?latitude=32.22967&longitude=120.4762',
+				//url: this.$store.state.baseUrl+'/shopping/restaurants?latitude=31.22967&longitude=121.4762',
+				success: (res) => {
+					this.recommendList = res.data
+				}
+			});
 		}
 	},
 	watch: {},

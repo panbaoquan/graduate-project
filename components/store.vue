@@ -4,7 +4,7 @@
 		<view class="stores-item" @click="detail()">
 			<view class="stores-item-leftLogo">
 				<view class="stores-item-leftLogo-top">
-				<image :src="shop.logoSrc" mode="aspectFill"></image>
+				<image :src="'https://elm.cangdu.org/img/'+shop.image_path" mode="aspectFill"></image>
 				</view>
 				<view class="stores-item-leftLogo-bottom">
 					<!--占位-->
@@ -13,19 +13,20 @@
 			<view class="stores-item-rightContent">
 				<view class="stores-item-rightContent-top">
 				<view class="store-title">
-					{{index}}{{shop.name}}
+					{{shop.name}}
 				</view>
 				<view class="store-firstLine">
 					<view class="store-firstLine-evaluate">
-						<image  class="store-firstLine-evaluate-rate" src="@/static/images/icon-rate.png" mode="aspectFill"></image><text>4.2</text>
+						<image  class="store-firstLine-evaluate-rate" src="@/static/images/icon-rate.png" mode="aspectFill"></image><text>{{shop.rating}}</text>
 					</view>
 					<view class="store-firstLine-arrivalTime">
-						<text>30分钟</text>
-						<text>1.5km</text>
+						<text>{{shop.order_lead_time}}</text>
+						<text>{{shop.distance}}</text>
 					</view>
 				</view>
 				<view class="store-secondLine">
-					起送<text>￥0</text>配送<text>￥0</text>人均<text>￥0</text>
+					起送<text>￥{{shop.float_minimum_order_amount}}</text>配送<text>￥{{shop.float_delivery_fee}}</text>
+					<!-- 人均<text>￥0</text> -->
 				</view>
 				</view>
 				<view class="stores-item-rightContent-bottom">
@@ -72,6 +73,7 @@
 				
 				
 			}
+			
 		}
 	}
 </script>
@@ -138,7 +140,7 @@
 				 font-size: 12px;
 				 display: flex;
 				 &-evaluate {
-					 flex: 1;
+					 width: 20%;
 				     display: flex;
 					 align-items: center;
 					 &-rate {
@@ -150,7 +152,7 @@
 					 }
 				 }
 				 &-arrivalTime {
-					 flex: 1;
+					 width: 80%;
 					 text-align: right;
 					 &>text:nth-child(2) {
 					    padding-left: 5px;
