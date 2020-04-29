@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<navigator url="@pages/storeDetail/index">
-		<view class="stores-item" @click="detail()">
+		<view class="stores-item" @click="detail(shop.id)">
 			<view class="stores-item-leftLogo">
 				<view class="stores-item-leftLogo-top">
 				<image :src="'https://elm.cangdu.org/img/'+shop.image_path" mode="aspectFill"></image>
@@ -52,25 +52,25 @@
 			page:String,
 			shop:''
 		},
-		onLoad() {
-			
-		},
 		methods:{
-			detail(){
+			detail(id){
 				//跳转详情页面
 				// url:'../pages/storeDetail/index',
-				let pages = getCurrentPages()
-				let page = (pages[pages.length - 1]).route
-				if(page==='pages/index/index'){
-					uni.navigateTo({
-						url:'/pages/storeDetail/index?id='+this.shop.id
-					})
-				}else {
-					uni.navigateTo({
-						url:'../../storeDetail/index?id='+this.shop.id
-					})
-				}
+				// let pages = getCurrentPages()
+				// let page = (pages[pages.length - 1]).route
+				// if(page==='pages/index/index'){
+				// 	uni.navigateTo({
+				// 		url:'/pages/storeDetail/index?shopId='+id
+				// 	})
+				// }else {
+				// 	uni.navigateTo({
+				// 		url:'../../storeDetail/index?shopId='+id
+				// 	})
+				// }
 				
+				uni.navigateTo({
+					 url: '/pages/storeDetail/index?shopId='+id
+				});
 				
 			}
 			

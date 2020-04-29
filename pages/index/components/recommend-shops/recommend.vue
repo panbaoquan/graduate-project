@@ -8,6 +8,7 @@
         <view
           class="nearStone-select-group"
           v-for="(item,index) in flags"
+          v-show="index!=1"
           :key="index"
           @tap="selectFlag(item.flagValue,item.flagName)"
         >
@@ -79,7 +80,7 @@
         </view>
       </view>
       <!--全部筛选-下拉面板-->
-      <view class="group-select-all" v-show="flags[3].flag_dropdown_list">尽请期待</view>
+      <!-- <view class="group-select-all" v-show="flags[3].flag_dropdown_list">尽请期待</view> -->
     </view>
   </view>
 </template>
@@ -188,14 +189,15 @@ export default {
 			  index:3
 			  
             }
-          ]
-        },
-        {
-          name: "全部筛选",
-          flagValue: true,
-          flagName: "flagFilter",
-          flag_dropdown_list: false
-        }
+		  ]
+		  }
+        // },
+        // {
+        //   name: "全部筛选",
+        //   flagValue: true,
+        //   flagName: "flagFilter",
+        //   flag_dropdown_list: false
+        // }
       ],
 	  category: [],
     };
@@ -398,9 +400,9 @@ export default {
 .nearStone {
   width: 100%;
   &_title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 20px 0 20px 13px;
+    padding: 10px 0 10px 13px;
     &_offset {
       padding-left: 18px;
     }
@@ -409,7 +411,7 @@ export default {
   &-select {
     font-size: 25rpx;
     display: flex;
-    text-align: center;
+    padding-left: 13px;
     &-group {
       flex: 1;
     }

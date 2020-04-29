@@ -1,14 +1,21 @@
 <template>
 	<scroll-view scroll-x="true" show-scrollbar="false">
 		<view class="filterList">
-			<view class="filterList_item" v-for="item in list" :key="item.id" @tap="selectItem(item.id)">
+			<view class="filterList_item" v-for="(item,index) in data.sub_categories" :key="index" @tap="selectItem(index,item.id)">
 				<view class="filterList_item_content" :class="{activeContent:item.id===activeId}">
 					<!-- #ifdef APP-PLUS -->
 					<image :src="item.src" mode=""></image>
 					<!-- #endif -->
 				</view>
 				<view class="filterList_item_title">
-					<span :class="{activeTitle:item.id===activeId}">{{item.name}}</span>
+					<span :class="{activeTitle:index===activeId}">
+						<span v-if="index==0">
+							全部
+						</span>
+						<span v-else>
+                           {{item.name}}
+						</span>
+					</span>
 				</view>
 			</view>
 		</view>
@@ -66,20 +73,43 @@
 						src: '../../../static/images/drink.png'
 					},
 				],
-			}
+			},
+			data:''
 		},
 		data() {
 			return {
-				activeId: 1
+				activeId: 0
 			};
 		},
 		methods: {
-			selectItem(id) {
-				this.activeId = id
+			selectItem(index,id) {
+				this.activeId = index
+				if(index==0){
+				uni.request({
+			    url: 'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_id='+id, 
+			    success: (res) => {
+				  this.$emit('filterData',res.data)
+			    }
+		        });	
+				}else {
+                  uni.request({
+			    url: 'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762&restaurant_category_ids[]='+id, 
+			    success: (res) => {
+				  this.$emit('filterData',res.data)
+			    }
+		        });
+				}
+				
 			}
 		},
 		components: {
 			Icon
+		},
+		watch:{
+			data(val){
+				this.data = val
+				console.log(this.data)
+			}
 		}
 	}
 </script>

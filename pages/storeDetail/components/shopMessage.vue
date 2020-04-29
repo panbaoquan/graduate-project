@@ -4,14 +4,17 @@
       <view class="item">
         <view class="item_icon">
           <Icon icon="icon-dingwei" size="20" color="#ccc" />
-          <span>江苏省常州市武进区XXX</span>
+          <span>{{data.address}}</span>
         </view>
-        <view class="item_phone" @click="phone">
+        <view class="item_phone" @click="phone(data.phone)">
           <Icon icon="icon-dianhua" size="20" color />
         </view>
       </view>
       <view class="one_shopImg">
-          <view class="" v-for="(item,index) in 3" :key="index"></view>
+          <!-- <view class="" v-for="(item,index) in 3" :key="index"></view> -->
+          <image src="@/static/images/shops_01.jpg" mode="aspectFill" />
+          <image src="@/static/images/shops_02.jpg" mode="aspectFill" />
+          <image src="@/static/images/shops_03.jpg" mode="aspectFill" />
       </view>
     </view>
     <view class="two">
@@ -24,7 +27,7 @@
        <view class="item">
         <view class="item_icon">
           <Icon icon="icon-shijian" size="20" color="#ccc" />
-          <span>配送时间:</span><span> 08.30-23.59</span>
+          <span>配送时间:</span><span> {{data.opening_hours[0]}}</span>
         </view>
       </view>
     </view>
@@ -48,18 +51,25 @@
 <script>
 import Icon from "@/components/icon/index.vue";
 export default {
-  props: {},
+  props: {
+    data:''
+  },
   data() {
     return {};
   },
   computed: {},
   created() {},
   mounted() {},
-  watch: {},
+  watch: {
+    data(val){
+      this.data = val
+      console.log(data)
+    }
+  },
   methods: {
-    phone() {
+    phone(phone) {
       uni.makePhoneCall({
-        phoneNumber: "emm520" //仅为示例
+        phoneNumber: phone //仅为示例
       });
     }
   },
@@ -90,10 +100,9 @@ export default {
     &_shopImg {
        display: flex;
        justify-content: flex-start;
-       &>view {
+       &>image {
            width: 90px;
            height: 70px;
-           outline: 1px solid red;
            margin-right: 10px;
        }
     }

@@ -10,25 +10,26 @@
 		<view class="VerticalBox">
 			<!--左边滚动条-->
 			<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation :scroll-top="verticalNavTop" style="height:calc(100vh - 375upx)">
-				<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in list" :key="index" @tap="TabSelect"
+				<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-if="index<20?true:false" v-for="(item,index) in list" :key="index" @tap="TabSelect"
 				 :data-id="index">
-					Tab-{{item.name}}
+					{{item.name}}
 				</view>
 			</scroll-view>
 			<!--右边内容-->
 			<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375upx)"
 			 :scroll-into-view="'main-'+mainCur" @scroll="VerticalMain">
-				<view class="myPadding" v-for="(item,index) in list" :key="index" :id="'main-'+index">
+				<view class="myPadding" v-for="(item,index) in list" v-if="index<20?true:false" :key="index" :id="'main-'+index">
 					<view class="cu-bar solid-bottom bg-white">
 						<view class="action">
-							<text class="cuIcon-title text-green"></text> Tab-{{item.name}}</view>
+							<text class="cuIcon-title text-green"></text>{{item.name}}</view>
 					</view>
 					<view class="cu-list menu-avatar">
 						<!--我添加的-->
-					  <view class="myList" v-for="(item,index) in goods" :key="index">
+					  <view class="myList" v-for="(item,index) in item.foods" :key="index">
 						  <view class="myList_left">
 						  	<view class="myList_left_img">
-						  		<image src="@/static/images/shops/goodsImg.jpg" mode="aspectFill"></image>
+						  		<!-- <image src="@/static/images/shops/goodsImg.jpg" mode="aspectFill"></image> -->
+								<image :src="'//elm.cangdu.org/img/'+item.image_path" mode="aspectFill" />
 						  	</view>
 							<!--占位-->
 							<view class="myList_left_xxx">
@@ -40,15 +41,16 @@
 						  		{{item.name}}
 						  	</view>
 							<view class="myList_right_ad">
-								{{item.ad}}
+								{{item.description}}
 							</view>
 							<view class="myList_right_other">
 								<view class="myList_right_other_share">
-									月售<span>{{item.share}}</span>份
+									月售<span>{{item.month_sales}}</span>份
 								</view>
 								<view class="myList_right_other_evaluate">
-									好评率<span>{{item.evaluate}}</span>%
+									评分<span>{{item.rating}}</span>
 								</view>
+
 							</view>
 							<view class="myList_right_activity">
 								更多活动尽请期待
@@ -56,12 +58,12 @@
 							<!--加减按钮-->
 							<view class="myList_right_btn">
 								<view class="myList_right_btn_minprice">
-									<span class="minprice">{{item.price}}</span><span style="color: red;">¥</span>元 
+									<span class="minprice">{{item.specfoods[0].price}}</span><span style="color: red;">¥</span>元 
 								</view>
 								<view class="myList_right_btn_btns">
 									<!-- <Counter :id="item.id" :rect="cartBasketRect"/> -->
 									<view class="minus" @tap="minus(item)">-</view>
-									 <viwe class="counter">{{item.count}}</viwe>
+									 <viwe class="counter">{{item.__v}}</viwe>
 									<view class="add flexc bold" @tap="add($event,index+1,item)">+</view>
 								</view>
 							</view>
@@ -87,6 +89,11 @@
 	import numberBox from '@/components/uni-number-box/uni-number-box.vue'
 	import Counter from './verticlnav/counter'
 	export default {
+		props:{
+			dataList:{
+				default:''
+			}
+		},
 		data() {
 			return {
 				list: [],
@@ -122,6 +129,7 @@
 		
 		},
 		mounted() {
+			console.log(this.dataList)
 			uni.hideLoading()
 			//我添加的
 			const self = this
@@ -159,18 +167,18 @@
 				this.$refs.inCart.addToCart(e,id);
 				//this.Total = price+this.Total
 				//数量增加
-				goods.count++
+				goods.__v++
 				//单件货品moneny叠加
-				this.Total = this.Total + goods.price 
+				this.Total = this.Total + goods.specfoods[0].price
 			 },
 			 //减去
 			 minus(goods){
 				//数量减少
-				if(goods.count>0){
+				if(goods.__v>0){
 					//单件货品moneny累减
-					if(goods.count){
-					  this.Total = this.Total - goods.price
-					  goods.count--
+					if(goods.__v){
+					  this.Total = this.Total - goods.specfoods[0].price
+					  goods.__v--
 					}
                     
 				}
@@ -220,6 +228,9 @@
 		watch:{
 			Total(val){
 				this.Total = val
+			},
+			dataList(val){
+				this.list = val
 			}
 		}
 	}

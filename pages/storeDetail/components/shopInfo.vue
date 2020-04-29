@@ -3,21 +3,24 @@
 		<!--商店名称栏-->
 		<view class="shopInfo">
 			<view class="shopInfo_logoImg">
-				<image src="../../../static/images/shops/logo/yidiandian.jpg" mode="aspectFill"></image>
+				<!-- <image src="../../../static/images/shops/logo/yidiandian.jpg" mode="aspectFill"></image> -->
+				<image :src="'//elm.cangdu.org/img/'+data.image_path" mode="aspectFill" />
 			</view>
 			<view class="shopInfo_content">
 				<view class="shopInfo_content_main">
 					<view class="shopInfo_content_name">
-						一點點
+						<!-- 一點點 -->
+						{{data.name}}
 					</view>
 					<view class="shopInfo_content_detail">
 						约45分钟
 					</view>
 					<view class="shopInfo_content_notice">
-					    公告: 欢迎光临，用餐高峰请提前下单，谢谢。
+					    公告: {{data.promotion_info}}
 					</view>
 					<view class="shopInfo_content_activity">
-					   更多活动尽请期待
+					   <!-- 更多活动尽请期待 -->
+					   {{data.description}}
 					</view>
 				</view>
 			</view>
@@ -27,10 +30,18 @@
 
 <script>
 	export default {
+        props:{
+			data:''
+		},
 		data() {
 			return {
 				
 			};
+		},
+		watch:{
+			data(val){
+				this.data = val
+			}
 		}
 	}
 </script>
