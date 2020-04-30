@@ -9,9 +9,9 @@
 		<!--送达时间-->
 		<Arrival/>
 		<!--付钱方式-->
-		<Types/>
+		<Types @types="getTypes"/>
 		<!--订单-->
-		<Order :total="total" :list="list"/>
+		<Order :total="total" :list="list" :shop="shop" :address="address" :type="type"/>
 	</view>
 </template>
 
@@ -25,13 +25,24 @@ import Order from "./components/order.vue"
 			return {
 				total:0,
 				list:[{}],
-				address:''
+				address:'',
+				shop:{},
+				type:'在线支付'
 			};
 		},
 		onLoad(option){
+			this.shop = JSON.parse(uni.getStorageSync('shopInfo'))
+			console.log(this.shop)
 			this.total = uni.getStorageSync('total')
 			this.list = JSON.parse(uni.getStorageSync('list'))
 			this.address = JSON.parse(option.address)
+			
+			
+		},
+		methods:{
+			getTypes(val){
+			   this.type = val
+			}
 		},
 		components: {
 			Address,

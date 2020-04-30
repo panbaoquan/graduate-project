@@ -78,7 +78,7 @@
 		<view class="cart">
 			<image id="cart" src="@/static/cart.png" mode="widthFix"></image>
 			<view class="total"><span>{{Total}}</span><span style="font-size:14px">¥元</span></view>
-	        <view class="settlement" @tap="goAplay" :class="[Total?'':'disabledBtn']">去结算</view>
+	        <view class="settlement" @tap="goAplay()" :class="[Total?'':'disabledBtn']">去结算</view>
 		</view>
 		<!-- 只需要绑定购物车位置即可 -->
 		<flyInCart ref="inCart" :cartBasketRect="cartBasketRect"></flyInCart>
@@ -92,7 +92,8 @@
 		props:{
 			dataList:{
 				default:''
-			}
+			},
+			shopInfo:''
 		},
 		data() {
 			return {
@@ -108,7 +109,8 @@
 					{id:1,name:'商品名称1',ad:'味道好急寥',share:100,evaluate:'90',price:10.5,count:0},
 					{id:2,name:'商品名称2',ad:'味道好急寥',share:80,evaluate:'95',price:12,count:0},
 					{id:3,name:'商品名称3',ad:'味道好急寥',share:120,evaluate:'92',price:11,count:0}
-				]
+				],
+				cartList:[]
 				
 			};
 		},
@@ -129,7 +131,6 @@
 		
 		},
 		mounted() {
-			console.log(this.dataList)
 			uni.hideLoading()
 			//我添加的
 			const self = this
@@ -142,25 +143,72 @@
 			//我添加的
 		},
 		methods: {
+			//去重
+			unique(arr) {
+            // 创建一个Map对象实例
+            const res = new Map() 
+            // 过滤条件：如果res中没有某个键，就设置这个键的值为1
+            return arr.filter((arr) => !res.has(arr.id) && res.set(arr.id, 1))
+			},
+			
 			//去支付
 			goAplay(){
 				if(this.Total) {
-                  let list = []
-				for(let i=0;i<this.goods.length;i++){
-					if(this.goods[i].count){
-						list.push(this.goods[i])
-					}
-				}
-				list = JSON.stringify(list)
-				//存取list 到localStorage
-				uni.setStorageSync('list', list)
+				 let cart = this.unique(this.cartList)
+				 for(let i=0;i<cart.length;i++){
+					 cart[i].count = 0
+				 }
+				 for(let i=0;i<cart.length;i++){
+					 for(let j=0;j<this.cartList.length;j++){
+						 if(cart[i].id==this.cartList[j].id){
+							 cart[i].count++
+						 }
+					 }
+				 }
+				 //存取cart 到localStorage
+				uni.setStorageSync('list',JSON.stringify(cart))
 				//存取total 到localStorag
-				uni.setStorageSync('total', this.Total)
+				uni.setStorageSync('total',this.Total)
+				//存取
+				let shop = {id:this.shopInfo.id,name:this.shopInfo.name,image_path:this.shopInfo.image_path}
+				
+				uni.setStorageSync('shopInfo',JSON.stringify(shop))
+
+				let testCart =[{
+					attrs: [],
+					extra: {},
+					id: 24492,
+					name: "苹果",
+					packing_fee: 0,
+					price: 20,
+					quantity: 1,
+					sku_id: 24465,
+					specs: ["默认"],
+					stock: 1000
+				}]
+				//下单信息请求
+				// uni.request({
+				// 	url:'https://elm.cangdu.org/v1/carts/checkout',
+				// 	//url: this.$store.state.baseUrl+'/v1/carts/checkout',
+				// 	method:'POST', 
+				// 	data: {
+				// 		come_from: "web",
+				// 		restaurant_id:'3276',
+				// 		geohash: "31.22299,121.36025",
+				// 		entities:[testCart]
+				// 	},
+				// 	success: (res) => {
+				// 		console.log(res.data);
+				// 	}
+				// });
+                 
+				//跳转
 				uni.navigateTo({
 					url: '/pages/aplay/index',
 				});
-				}
 				
+				}
+				 
 			},
 			//我添加的
 			 add(e,id,goods){
@@ -170,6 +218,15 @@
 				goods.__v++
 				//单件货品moneny叠加
 				this.Total = this.Total + goods.specfoods[0].price
+				
+				//加入购物车
+				let data = {}
+				data.id = goods._id
+				data.name = goods.name
+				data.price = goods.specfoods[0].price
+				data.count = 1
+				this.cartList.push(data)
+				
 			 },
 			 //减去
 			 minus(goods){
@@ -181,6 +238,15 @@
 					  goods.__v--
 					}
                     
+				}
+				//从购物车里删除
+				if(this.cartList){
+					for(let i=0;i<this.cartList.length;i++){
+						if(goods._id==this.cartList[i].id){
+							this.cartList.splice(i,1)
+							break;
+						}
+					}
 				}
 				
 			 },

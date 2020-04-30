@@ -133,6 +133,8 @@
 				 font-size: 32rpx;
 				 letter-spacing: 1px;
 				 font-weight: 600;
+				 height: 21px;
+				 overflow: hidden;
 			 }
 			 &-firstLine {
 				 height: 18px;

@@ -7,7 +7,8 @@ const store = new Vuex.Store({
         //baseUrl:'http://172.20.10.5:8001',
         imgBaseUrl:'https://fuss10.elemecdn.com',
         isLogin:false,
-        user_id:''
+        user_id:'',
+        order:[]
     },
     mutations: {},
     actions: {}

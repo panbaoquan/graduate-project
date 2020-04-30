@@ -1,8 +1,10 @@
 <template>
   <view class="order">
     <view class="shop">
-      <view class="shop_img"></view>
-      <view class="shop_name">商店名称</view>
+      <view class="shop_img">
+        <image :src="'https://elm.cangdu.org/img/'+shop.image_path" mode="aspectFill" />
+      </view>
+      <view class="shop_name">{{shop.name}}</view>
     </view>
     <view class="list">
       <view class="goodsList" v-for="item in list" :key="item.id">
@@ -40,7 +42,7 @@
         <span>{{total}}</span>
         <span style="font-size:14px">¥元</span>
       </view>
-      <view class="cart_settlement" @tap="confirm">确认支付</view>
+      <view class="cart_settlement" @tap="confirm">确认下单</view>
     </view>
   </view>
 </template>
@@ -49,7 +51,7 @@
 export default {
   props: {
     total: {
-      defalut: 0
+      default: 0
     },
     list: {
       defalut: [
@@ -57,6 +59,13 @@ export default {
         { id: 2, name: "123", count: "2", price: "13" },
         { id: 3, name: "123", count: "1", price: "12" }
       ]
+    },
+    shop: "",
+    address: {
+      default: "无"
+    },
+    type: {
+      default:''
     }
   },
   data() {
@@ -72,21 +81,60 @@ export default {
   computed: {},
   created() {},
   mounted() {
-    this.total= parseFloat(this.total) + 7;
+    this.total = parseFloat(this.total) + 7;
   },
   watch: {},
   methods: {
+    //获取当前时间
+    getCurrentTime() {
+      let date = new Date();
+      //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let y = date.getFullYear();
+      let MM = date.getMonth() + 1;
+      MM = MM < 10 ? "0" + MM : MM; //月补0
+      let d = date.getDate();
+      d = d < 10 ? "0" + d : d; //天补0
+      let h = date.getHours();
+      h = h < 10 ? "0" + h : h; //小时补0
+      let m = date.getMinutes();
+      m = m < 10 ? "0" + m : m; //分钟补0
+      let s = date.getSeconds();
+      s = s < 10 ? "0" + s : s; //秒补0
+      return y + "-" + MM + "-" + d + " " + h + ":" + m + ":" + s;
+    },
+    //获取uuid
+    getUUID() {
+      let id = setTimeout("0");
+      clearTimeout(id);
+      return id;
+    },
     PickerChange(e) {
       this.index = e.detail.value;
     },
+    //确认下单
     confirm() {
-      let url = "/pages/aplay/confirm/confirm?total=" + this.total;
+      //将购物车,列入购物清单
+      let list = {};
+      list.id = this.getUUID();
+      list.time = this.getCurrentTime();
+      list.shopInfo = JSON.parse(uni.getStorageSync("shopInfo"));
+      list.list = JSON.parse(uni.getStorageSync("list"));
+      list.total = JSON.parse(uni.getStorageSync("total"));
+      list.address = this.address;
+      list.type = this.type;
+      this.$store.state.order.push(list);
+      let url ="/pages/aplay/confirm/confirm?total=" + this.total + "&id=" + list.id;
       uni.navigateTo({
         url: url
       });
     }
   },
-  components: {}
+  components: {},
+  watch: {
+    type(val) {
+      this.type = val;
+    }
+  }
 };
 </script>
 
@@ -101,10 +149,11 @@ export default {
   height: 50px;
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
   &_img {
-    width: 40px;
-    height: 40px;
-    border: 1px solid red;
-    margin-left: 10px;
+    & > image {
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+    }
   }
   &_name {
     padding-left: 5px;
@@ -112,7 +161,7 @@ export default {
   }
 }
 .list {
-  padding: 0 10px;
+  padding: 0 10px 100px 10px;
 
   &_deliveryFee {
     text-align: left;

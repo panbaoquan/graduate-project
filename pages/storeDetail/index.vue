@@ -11,7 +11,7 @@
       <!--切换栏-->
       <nav-bar @func="getNavIndex"></nav-bar>
       <!--垂直导航 购物车组件也在这里-->
-      <vertical-nav v-show="navIndex==0?true:false" :dataList="category"></vertical-nav>
+      <vertical-nav v-show="navIndex==0?true:false" :dataList="category" :shopInfo="shopInfo"></vertical-nav>
 	  <!--评论组件-->
 	  <Comment v-show="navIndex==1?true:false"/>
 	  <!--商家组件-->

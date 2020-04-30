@@ -24,11 +24,13 @@ export default {
   },
   computed: {},
   created() {},
-  mounted() {},
+  mounted() {
+  },
   watch: {},
   methods: {
 	  PickerChange(e) {
-	  	this.index = e.detail.value
+      this.index = e.detail.value
+      this.$emit('types',this.picker[this.index])
 	  },
   },
   components: {}

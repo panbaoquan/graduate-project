@@ -1,12 +1,6 @@
 <template>
   <view class="success">
-    <!-- <cu-custom bgcolor="bg-gradual-white" :isBack="true" :height="70">
-      <block slot="backText">
-        <view class="goBack"></view>
-      </block>
-	  <Icon icon="icon-fanhui" />
-      <block slot="content">支付结果</block>
-    </cu-custom>-->
+   
     <view class="title">
       <view class="title-backIcon" @tap="goback">
         <Icon icon="icon-fanhui" color="#000" size="16" style="margin-left:10px;"></Icon>
@@ -17,7 +11,7 @@
     <view class="content">
       <image src="@/static/images/success.png" mode="aspectFit" />
       <view class="content_title">支付成功!</view>
-      <view>{{time}}s后将自动返回首页</view>
+      <view>{{time}}s后将自动返回订单中心</view>
     </view>
   </view>
 </template>
@@ -39,7 +33,7 @@ export default {
           this.time--;
           if (this.time == 0) {
             clearInterval(name);
-            let url = "/pages/index/index";
+            let url = "/pages/order/order";
             uni.switchTab({
               url: url
             });
@@ -48,8 +42,8 @@ export default {
       }
 	},
 	goback(){
-		let url = "/pages/index/index";
-            uni.switchTab({
+		    let url = "/pages/order/order";
+        uni.switchTab({
               url: url
          });
 	}

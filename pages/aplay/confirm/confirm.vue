@@ -39,6 +39,26 @@
 	<view class="confirmBtn" @tap="confirm">
 		确认支付
 	</view>
+	<!--modal-->
+		<view class="cu-modal" :class="modalName=='DialogModal1'?'show':''">
+			<view class="cu-dialog">
+				<view class="bg-white justify-end">
+					<view class="content" style="min-height:40px;line-height:40px">提示</view>
+					<!-- <view class="action" @tap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view> -->
+				</view>
+				<view class="padding-xl">
+					已超时,支付失败
+				</view>
+				<view class="cu-bar bg-white justify-center">
+					<view class="action">
+						<!-- <button class="cu-btn line-green text-green" @tap="hideModal">取消</button> -->
+						<button class="cu-btn bg-green margin-left" @tap="hideModal">确定</button>
+					</view>
+				</view>
+			</view>
+		</view>
   </view>
 </template>
 
@@ -53,7 +73,9 @@ export default {
 	  types:[
 		  {id:1,name:'微信支付',imgSrc:'../../../static/images/wechatPay.png',selected:false},
 		  {id:2,name:'支付宝支付',imgSrc:'../../../static/images/apliayPay.png',selected:true},
-	  ]
+	  ],
+	  orderId:'',
+	  modalName: null
     };
   },
   onLoad(option) {
@@ -61,7 +83,9 @@ export default {
     //我的项目中只赋值一次, 所以直接设为true了
     this.reset = !this.reset;
     //如果还要设置天, 时, 秒, 在上面声明绑定后, 在这里赋值即可
-    this.minute = 30;
+	this.minute = 15;
+	
+	this.orderId = option.id
   },
   methods:{
 	  select(id) {
@@ -74,11 +98,19 @@ export default {
 		}
 		
 	  },
-	  confirm(){
+	  //确认支付
+	  confirm(e){
 		  let url = "/pages/aplay/confirm/success"
 		  uni.navigateTo({
 			   url: url,
 		  });
+	  },
+	  //隐藏modal
+	  hideModal(e) {
+		 this.modalName = null
+	  },
+	  timeUp(){
+		  this.modalName = 'DialogModal1'
 	  }
   },
   components: {
