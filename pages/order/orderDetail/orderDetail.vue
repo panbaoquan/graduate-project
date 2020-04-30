@@ -151,7 +151,7 @@
 		  display: flex;
 		  justify-content: space-between;
 		  align-items: center;
-		  border-bottom: 1px solid rgba(0,0,0,0.1);
+		  border-bottom: .5px solid rgba(0,0,0,0.1);
 		  &_left {
 			   display: flex;
 			   align-items: center;

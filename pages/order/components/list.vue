@@ -60,6 +60,8 @@ export default {
 
 <style scoped lang="scss">
 .list {
+    border-radius: 8px;
+    margin: 10px;
     display: flex;
     background-color: #FFF;
     padding: 10px 10px 0 10px;
@@ -78,12 +80,13 @@ export default {
         &_one {
             padding-left: 5px;
             height: 46px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: .5px solid rgba(0,0,0,0.1);
             &_top {
                 display: flex;
                 justify-content: space-between;
                 .shopName {
                     font-weight: bold;
+                    overflow:hidden;
                 }
             }
             &_bottom {
@@ -95,7 +98,7 @@ export default {
             height: 46px;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: .5px solid rgba(0,0,0,0.1);
             &_goods {
 
             }
