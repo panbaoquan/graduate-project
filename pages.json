@@ -87,7 +87,10 @@
         ,{
             "path" : "pages/order/orderDetail/orderDetail",
             "style" : {}
-        }
+        },{
+			"path":"pages/search/search",
+			"style":{}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

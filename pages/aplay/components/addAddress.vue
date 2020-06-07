@@ -62,14 +62,15 @@ export default {
     addAddress() {
 	 if(this.$store.state.isLogin){
          uni.navigateTo({
-		   url: '/pages/aplay/chooseAddress/chooseAddress'
-	  });
+		     url: '/pages/aplay/chooseAddress/chooseAddress'
+	      });
 	 }else {
-		 uni.showToast({
-			 title: '您尚未登录,请先登录后再操作',
-			 duration: 3000,
-			 icon:'none'
-		 });
+		//  uni.showToast({
+		// 	 title: '您尚未登录,请先登录后再操作',
+		// 	 duration: 3000,
+		// 	 icon:'none'
+    //  });
+     
 	 }
     }
   },

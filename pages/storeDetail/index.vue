@@ -29,6 +29,7 @@ import verticalNav from "./components/verticalnav.vue";
 import Header from "./components/header.vue";
 import Comment from "./components/comment";
 import shopMessage from "./components/shopMessage"
+import apiDetail from "../../request/shopDetail"
 export default {
 
   data() {
@@ -50,21 +51,35 @@ export default {
      // console.log(this.navIndex);
     },
     getStoreCategory(id){
-      uni.request({
-        url:'https://elm.cangdu.org/shopping/getcategory/'+id,
-        //url: 'https://elm.cangdu.org/shopping/restaurant/'+id, 
-        success: (res) => {
-          this.category = res.data.category_list
-        }
-      });
+      //旧的写法
+      // uni.request({
+      //   //url:'https://elm.cangdu.org/shopping/getcategory/'+id,
+      //   url:this.$store.state.baseUrl+'/shopping/getcategory/'+id,
+        
+      //   success: (res) => {
+      //     this.category = res.data.category_list
+      //   }
+      // });
+      //新的封装
+      apiDetail.getCategory(id).then(res=>{
+        this.category = res[1].data.category_list
+      })
+
     },
     getStoreInfo(id){
-      uni.request({
-        url: 'https://elm.cangdu.org/shopping/restaurant/'+id, 
-        success: (res) => {
-          this.shopInfo = res.data
-        }
-      });
+      // uni.request({
+      //   //url: 'https://elm.cangdu.org/shopping/restaurant/'+id, 
+      //   url: this.$store.state.baseUrl+'/shopping/restaurant/'+id, 
+      //   success: (res) => {
+      //     this.shopInfo = res.data
+      //   }
+      // });
+
+      //新的封装
+      apiDetail.getInfo(id).then(res=>{
+        console.log(res)
+        this.shopInfo = res[1].data
+      })
     }
   },
   components: {

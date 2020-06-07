@@ -121,11 +121,11 @@
 				    return false;
 				}
 			
-				// uni.showToast({
-				//     icon: 'none',
-				// 	position: 'bottom',
-				//     title: '模拟倒计时触发'
-				// });
+				uni.showToast({
+				    icon: 'none',
+					position: 'bottom',
+				    title: '模拟倒计时触发'
+				});
 				
 				// setTimeout(function(){
 				// 	_this.$refs.runCode.$emit('runCode',0); //假装模拟下需要 终止倒计时
@@ -173,14 +173,14 @@
 		            return false;
 				}
 				//测试
-				// if (this.verCode.length != 4 ||this.verCode!=this.captchaCode) {
-				//     uni.showToast({
-				//         icon: 'none',
-				// 		position: 'bottom',
-				//         title: '验证码不正确'
-				//     });
-				//     return false;
-				// }
+				if (this.verCode.length != 4 ||this.verCode!=this.captchaCode) {
+				    uni.showToast({
+				        icon: 'none',
+						position: 'bottom',
+				        title: '验证码不正确'
+				    });
+				    return false;
+				}
 				setTimeout(function(){
 					_this.isRotate=false
 				},3000)
@@ -192,13 +192,13 @@
 				   url:this.$store.state.baseUrl+'/v2/login',
 				   method:'POST',
 				   data: {
-						// username: this.phoneData,
-						// password: this.passData,
-						// captcha_code: this.verCode
+						username: this.phoneData,
+						password: this.passData,
+						captcha_code: this.verCode
 						//
-						username: '18262976292',
-						password: '123456',
-						captcha_code: '1234'
+						// username: '18262976292',
+						// password: '123456',
+						// captcha_code: '1234'
 					},
 					success: (res) => {
 						_this.isRotate=false
@@ -225,38 +225,38 @@
 							//同步存储
 							uni.setStorageSync('usrInfo', JSON.stringify(res.data))
 						}
-						// if(res.data.data.userName==this.phoneData && res.data.data.password==this.passData){
-						//    this.$store.state.isLogin = true
-						//    uni.showToast({
-				        //     icon: 'none',
-					    //     position: 'bottom',
-				        //      title: '登录成功'
-						// 	 });
-						// uni.switchTab({
-						// 	 url: '/pages/mine/mine'
-						// });
-						// }else if(res.data.data.userName!=this.phoneData){
-						// 	uni.showToast({
-				        //     icon: 'none',
-					    //     position: 'bottom',
-				        //      title: '手机号错误'
-						// 	 });
-						// 	return false
-						// }else if(res.data.data.password!=this.passData){
-						// 	uni.showToast({
-				        //     icon: 'none',
-					    //     position: 'bottom',
-				        //      title: '密码错误'
-						// 	 });
-						// 	 return false	 
-						// }else if(this.captchaCode!=this.verCode) {//模拟后台 验证码
-						// 	uni.showToast({
-				        //     icon: 'none',
-					    //     position: 'bottom',
-				        //      title: '验证码错误'
-						// 	 });
-						// 	 return false
-						// }
+						if(res.data.data.userName==this.phoneData && res.data.data.password==this.passData){
+						   this.$store.state.isLogin = true
+						   uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '登录成功'
+							 });
+						uni.switchTab({
+							 url: '/pages/mine/mine'
+						});
+						}else if(res.data.data.userName!=this.phoneData){
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '手机号错误'
+							 });
+							return false
+						}else if(res.data.data.password!=this.passData){
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '密码错误'
+							 });
+							 return false	 
+						}else if(this.captchaCode!=this.verCode) {//模拟后台 验证码
+							uni.showToast({
+				            icon: 'none',
+					        position: 'bottom',
+				             title: '验证码错误'
+							 });
+							 return false
+						}
 					}
 				});
 				

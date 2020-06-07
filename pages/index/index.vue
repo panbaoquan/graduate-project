@@ -1,3 +1,4 @@
+
 <template>
 	<view class="modStyle">
 		<scroll-view scroll-top="200px" scroll-y="true" class="scroll-Y" @scroll="scroll" show-scrollbar="true">
@@ -31,6 +32,7 @@ import searchBar from '../../components/searchBar.vue';
 import mySwiper from './components/swiper.vue';
 import categoryBar from './components/categoryBar.vue';
 import Recommend from './components/recommend-shops/recommend.vue';
+import apiShop from '../../request/request'
 export default {
 	data() {
 		return {
@@ -51,6 +53,7 @@ export default {
 				logoSrc: '/static/images/storesLogo/KFC-logo.jpg'
 			},
 			baseUrl :'https://elm.cangdu.org',
+			//baseUrl:'http://192.168.0.103:8001',
 			recommendList:[]
 		};
 	},
@@ -63,8 +66,8 @@ export default {
 			// type: 'wgs84',
 			geocode:true,
 			success: (res)=> {
-				console.log('当前位置的经度：' + res.longitude);
-				console.log('当前位置的纬度：' + res.latitude);
+				//console.log('当前位置的经度：' + res.longitude);
+				//console.log('当前位置的纬度：' + res.latitude);
 				let geohash = '31.906195,118.801154'
 				let geohash2 = res.latitude+','+res.longitude
 				// console.log(geohash2)
@@ -126,13 +129,18 @@ export default {
 		},
 		//获取推荐商家
         getRecommendStores(){
-			uni.request({
-				url:'https://elm.cangdu.org/shopping/restaurants?latitude=32.22967&longitude=120.4762',
-				//url: this.$store.state.baseUrl+'/shopping/restaurants?latitude=31.22967&longitude=121.4762',
-				success: (res) => {
-					this.recommendList = res.data
-				}
-			});
+			// uni.request({
+			// 	//url:'https://elm.cangdu.org/shopping/restaurants?latitude=32.22967&longitude=120.4762',
+			// 	url: this.$store.state.baseUrl+'/shopping/restaurants?latitude=31.22967&longitude=121.4762',
+			// 	success: (res) => {
+			// 		this.recommendList = res.data
+			// 	}
+			// });
+		    apiShop.getShopList().then(res=>{
+				this.recommendList = res[1].data
+				console.log(res[1].data)
+			})
+
 		}
 	},
 	watch: {

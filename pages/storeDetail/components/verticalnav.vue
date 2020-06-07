@@ -153,6 +153,16 @@
 			
 			//去支付
 			goAplay(){
+				console.log(this.$store.state.isLogin)
+				//判读是否登录
+				if(!this.$store.state.isLogin){
+                    uni.showToast({
+			         title: '您尚未登录,请先登录后再操作',
+			         duration: 3000,
+		              icon:'none'
+				 });
+				 return
+				}
 				if(this.Total) {
 				 let cart = this.unique(this.cartList)
 				 for(let i=0;i<cart.length;i++){

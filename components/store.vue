@@ -4,7 +4,8 @@
 		<view class="stores-item" @click="detail(shop.id)">
 			<view class="stores-item-leftLogo">
 				<view class="stores-item-leftLogo-top">
-				<image :src="'https://elm.cangdu.org/img/'+shop.image_path" mode="aspectFill"></image>
+				<image :src="baseUrl+'/img/'+shop.image_path" mode="aspectFill"></image>
+				<!-- <image :src="'http://192.168.0.103:8001/img/'+shop.image_path" mode="aspectFill"></image> -->
 				</view>
 				<view class="stores-item-leftLogo-bottom">
 					<!--占位-->
@@ -44,9 +45,14 @@
 	</view>
 	
 </template>
-
 <script>
+    import config from '@/config/env'
 	export default {
+		data () {
+			return {
+				baseUrl:config.baseUrl
+			}
+		},
 		props:{
 			index:Number,
 			page:String,

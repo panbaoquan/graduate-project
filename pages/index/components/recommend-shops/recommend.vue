@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import apiShop from '@/request/request'
 export default {
   props: {
     isTop: ""
@@ -307,6 +308,17 @@ export default {
       }
     },
     finish() {
+		if(this.count==0){
+      apiShop.getShopList().then(res=>{
+        this.$emit('speed',res[1].data)
+      //箭头向下
+      this.flags[2].flagValue = true;
+      //关闭下拉面板
+      this.flags[2].flag_dropdown_list = false;
+
+      return false
+      })
+    }
 	  //最小时间索引
 	  let minTimeIndex = 0
 	  let choosedTime =[]
@@ -337,8 +349,9 @@ export default {
 	  //根据距离和时间获取数据
 	   uni.request({
         url:
-          "https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762", //仅为示例，并非真实接口地址。
-        data: {
+          //"https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762", //仅为示例，并非真实接口地址。
+          this.$store.state.baseUrl+'/shopping/restaurants?latitude=31.22967&longitude=121.4762',
+       data: {
           order_by: 5
         },
         success: res => {

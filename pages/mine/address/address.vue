@@ -136,6 +136,7 @@ export default {
                     title: "删除地址成功",
                     duration: 2000
                   });
+                  _this.getAddresses()
                 } else {
                   uni.showToast({
                     title: "删除失败",
